@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.0.1] – 2026-09-09
+
+### Behoben
+- Neuinstallation: Der Start scheiterte, wenn `LLM_MAX_TOKENS` in der Umgebung leer war (Compose reicht nicht gesetzte Werte als leer durch). Leere Werte gelten jetzt als nicht gesetzt, und ein Fehler beim Übernehmen der Startwerte verhindert den Start nicht mehr.
+
+### Hinweise zum Update
+- Bestehende Installationen sind nicht betroffen; 1.0.0 ließ sich nur nicht frisch installieren.
+
 ## [1.0.0] – 2026-09-09
 
 ### Neu

@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-09-09T11:58:17Z",
-  "latest": "1.0.0",
+  "generated_at": "2026-09-09T12:13:10Z",
+  "latest": "1.0.1",
   "releases": [
+    {
+      "version": "1.0.1",
+      "published_at": "2026-09-09T12:13:10Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.0.1",
+          "digest": "sha256:bc579ff4a59d33b2720ca622e20241dc1d88bb47837b1662cddcf6f5ffb2ccdf",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.0",
+          "digest": "sha256:50664731cfcac1b045111ab0325a439e9539f3ff7cc5e6682d83329cf4b2128b"
+        }
+      },
+      "changelog": "### Behoben\n- Neuinstallation: Der Start scheiterte, wenn `LLM_MAX_TOKENS` in der Umgebung leer war (Compose reicht nicht gesetzte Werte als leer durch). Leere Werte gelten jetzt als nicht gesetzt, und ein Fehler beim Übernehmen der Startwerte verhindert den Start nicht mehr.\n\n### Hinweise zum Update\n- Bestehende Installationen sind nicht betroffen; 1.0.0 ließ sich nur nicht frisch installieren.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.0.0",
       "published_at": "2026-09-09T11:58:17Z",
