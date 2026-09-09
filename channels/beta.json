@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "product": "firmen-ki",
+  "channel": "beta",
+  "generated_at": "2026-09-09T11:49:33Z",
+  "latest": "0.9.0-beta.2",
+  "releases": [
+    {
+      "version": "0.9.0-beta.2",
+      "published_at": "2026-09-09T11:49:33Z",
+      "prerelease": true,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:0.9.0-beta.2",
+          "digest": "sha256:e219a345268f23421486831e192e04288bfbc619b8383479a68798ecc0addff2",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.0",
+          "digest": "sha256:50664731cfcac1b045111ab0325a439e9539f3ff7cc5e6682d83329cf4b2128b"
+        }
+      },
+      "changelog": "### Behoben\n- Veröffentlichung des Installers im Release-Workflow (Platzhalterprüfung).",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    }
+  ]
+}
