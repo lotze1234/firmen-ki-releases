@@ -12,12 +12,7 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
-## [0.9.0-beta.2] – 2026-09-09
-
-### Behoben
-- Veröffentlichung des Installers im Release-Workflow (Platzhalterprüfung).
-
-## [0.9.0-beta.1] – 2026-09-09
+## [1.0.0] – 2026-09-09
 
 ### Neu
 - Firmen-KI hat jetzt eine Versionsnummer. Sie steht unten in der Seitenleiste und auf der Status-Seite
@@ -56,4 +51,4 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 - Seitenleiste: DATEV, Datenbanken und Dokumente sind unter „Datenanbindung“ zusammengefasst.
 
 ### Hinweise zum Update
-- Erstes Release, keine Vorgängerversion.
+- Erstes freigegebenes Release (entspricht den Vorabversionen 0.9.0-beta.1 und 0.9.0-beta.2). Keine Vorgängerversion.

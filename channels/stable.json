@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "product": "firmen-ki",
-  "channel": "beta",
+  "channel": "stable",
   "generated_at": "2026-09-09T11:58:17Z",
   "latest": "1.0.0",
   "releases": [
@@ -33,38 +33,6 @@
         }
       },
       "changelog": "### Neu\n- Firmen-KI hat jetzt eine Versionsnummer. Sie steht unten in der Seitenleiste und auf der Status-Seite\n  (zusammen mit Build-Datum und Sandbox-Version).\n- Standard-Skills und Standard-Agenten werden nach einem Update automatisch auf den neuen Stand gebracht.\n- Neue Admin-Seite **Updates**: zeigt installierte und verfügbare Version mit Änderungsübersicht, prüft alle\n  6 Stunden den Update-Server (Schaltfläche „Jetzt prüfen“), installiert Updates per Knopfdruck oder automatisch\n  im Wartungsfenster (Wochentage und Uhrzeit wählbar) und führt einen Verlauf aller Updates.\n- Installation als Docker-Compose-Paket unter `/opt/firmen-ki` mit Installer, Betriebs-CLI `bin/firmenki`\n  (Status, Logs, Backup, Wiederherstellung, Update, Rollback) und wahlweise HTTP im LAN oder HTTPS über Caddy.\n- Skills und Agenten sind jetzt in **Standard** (kommt mit Updates) und **Firmen-Inhalte** (bleiben bei Updates\n  unverändert) getrennt. Standard-Inhalte lassen sich per „Anpassen“ als Firmen-Kopie übernehmen; ändert sich der\n  Standard später, zeigt die Seite die Unterschiede und bietet „Zurücksetzen“ an. Firmen-Skills können als ZIP,\n  Firmen-Agenten als Markdown exportiert und importiert werden.\n- Firmen-Pakete des Herstellers (`packages/`) werden beim Start und über „Pakete neu einlesen“ importiert.\n- Einstellungen → Tools: einzelne Tools abschalten und die Tool-Policy per YAML überlagern; beides bleibt bei\n  Updates erhalten.\n- Neuer Bereich **KI-Modelle**: Anbindungen an mehrere Anbieter verwalten – lokale OpenAI-kompatible Server\n  (LM Studio, vLLM, llama.cpp), Ollama, Anthropic Claude, OpenAI ChatGPT, Google Gemini, OpenRouter (u. a. Meta\n  Llama), Mistral, DeepSeek, xAI, Perplexity. Je Anbindung Zugang, Modell (Liste über „Modelle laden“ oder\n  manuell), Kontextfenster, Antwortlänge, Temperatur, Reasoning; „Verbindung testen“ mit Dauer und Token/s.\n  Ein Modell ist Standard; in jeder Unterhaltung (Chat-Kopf „Modell“) und bei jedem Agenten kann ein anderes gewählt\n  werden. Änderungen gelten sofort ohne Neustart; Werte aus der Umgebung legen nur beim ersten Start das\n  Standard-Modell an.\n- **KI-Agent- und Skill-Verbesserung**: Ein Entwicklerwerkzeug (Claude Code oder Codex, im App-Image enthalten;\n  Anmeldung unter Einstellungen mit dem Claude- bzw. ChatGPT-Konto über die Anmeldeseite des Anbieters) überarbeitet Skills und Agenten im Hintergrund – nach\n  fehlgeschlagenen Agenten-Prüfungen, bei gehäuften Skript-Fehlern oder auf Knopfdruck. Vorschläge erscheinen unter\n  „Verbesserungen“ mit Begründung und Diff und werden vom Admin übernommen oder verworfen; Standard-Inhalte werden\n  dabei zu Firmen-Kopien.\n- Einstellungen → **Dokumentsuche**: Embedding-Modell, Dimensionen und die Anbindung für Embeddings in der\n  Oberfläche, mit Hinweis auf die Neu-Indizierung (`firmenki:documents:reindex`).\n\n- Die Oberfläche ist dreisprachig (Deutsch, Englisch, Französisch): Umschalter DE/EN/FR unten in der Seitenleiste,\n  gespeichert je Benutzer; ohne Einstellung folgt die Sprache dem Browser. Der Assistent antwortet im Zweifel in der\n  Oberflächensprache.\n- Seitenleiste: DATEV, Datenbanken und Dokumente sind unter „Datenanbindung“ zusammengefasst.\n\n### Hinweise zum Update\n- Erstes freigegebenes Release (entspricht den Vorabversionen 0.9.0-beta.1 und 0.9.0-beta.2). Keine Vorgängerversion.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "0.9.0-beta.2",
-      "published_at": "2026-09-09T11:49:33Z",
-      "prerelease": true,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:0.9.0-beta.2",
-          "digest": "sha256:e219a345268f23421486831e192e04288bfbc619b8383479a68798ecc0addff2",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.0",
-          "digest": "sha256:50664731cfcac1b045111ab0325a439e9539f3ff7cc5e6682d83329cf4b2128b"
-        }
-      },
-      "changelog": "### Behoben\n- Veröffentlichung des Installers im Release-Workflow (Platzhalterprüfung).",
       "notes": {
         "expected_downtime_seconds": 60
       }
