@@ -12,6 +12,25 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.0] – 2026-09-09
+
+### Neu
+- **E-Mail-Versand** (Einstellungen → E-Mail-Versand): SMTP oder Microsoft 365 über die Graph API (App-Registrierung mit `Mail.Send`), Absender, Testmail-Knopf, Empfänger-Positivliste (Adressen oder @domain). Der Assistent kann damit auf Wunsch E-Mails mit Anhängen aus seinen Ergebnissen senden (Tool `send_email`, jeder Versand im Audit), und automatische Aufgaben melden ihr Ergebnis per E-Mail – nur bei Meldungen oder nach jedem Lauf.
+- **Aufgaben**: automatische, wiederkehrende Aufgaben für den Assistenten oder einen Agenten (alle X Minuten, täglich, wöchentlich). Anlegen per Formular oder direkt im Chat („Prüfe … alle 2 Stunden“ – der Assistent legt die Aufgabe über das Tool `schedule_task` an). Jede Aufgabe hat eine eigene Unterhaltung mit den vollständigen Antworten; die Seite „Aufgaben“ zeigt Verlauf (OK / Meldung / Fehler), nächsten Lauf, Jetzt ausführen, Pausieren, Meldungen als gesehen markieren. Antworten, die mit „ACHTUNG“ beginnen, zählen als Meldung und erscheinen als Zähler in der Seitenleiste. Administratoren sehen die Aufgaben aller Benutzer.
+- **Datenanbindung → Server**: Server per SSH anbinden (Schlüssel oder Passwort, verschlüsselt gespeichert) mit einer **Positivliste erlaubter Befehle** (ein Muster je Zeile, `*` für Argumente; Verkettungen, Umleitungen und Schreibbefehle sind immer verboten). Der Assistent nutzt das Tool `server_command` für Speicherplatz, Dienste, Last und Logs; jeder Aufruf steht im Audit, abgelehnte Befehle als blockiert. Verbindungstest im Formular; Host-Schlüssel werden unter `storage/ssh/known_hosts` gemerkt.
+- 16 Standard-Agenten für den Büroalltag: Daten-Analyst, Berichtsersteller, Dokumenten-Konverter, Dokumenten-Rechercheur, Web-Rechercheur, Präsentations-Ersteller, Serienbrief-Assistent, Projektplaner, Protokollant, Übersetzer, Zusammenfasser, Angebotsersteller, Rechnungsprüfer, Kennzahlen-Reporter, Listen-Abgleicher, Dokumenten-Sortierer. Auslöser und Beschreibungen in Deutsch, Englisch und Französisch; die Agenten antworten in der Sprache der Anfrage. Der Data Analyst hat die automatische Funktionsprüfung bestanden (Testaufgabe Einlesen → Bereinigen → Kennzahlen → Pivot → Diagramme → Excel und PDF).
+- Standard-Skills und -Agenten haben Beschreibungen in drei Sprachen (Frontmatter `description_en`, `description_fr`).
+
+- **Datenanbindung → Dokumente**: SharePoint Online und OneDrive for Business als Dokumentquelle über Microsoft Graph (Entra-App-Registrierung mit `Sites.Read.All`): Site-URL, Bibliothek, Unterordner, Verbindungstest, regelmäßiger Scan wie bei Ordnern und SMB. Dokumente aus SMB- und SharePoint-Quellen lassen sich jetzt auch direkt aus der Trefferliste öffnen.
+- Hochgeladene Dateien erscheinen als Karten mit Typ-Icon, Name, Format und Größe direkt im Eingabefeld und lassen sich dort einzeln wieder entfernen; noch nicht gesendete Dateien werden ebenfalls als Karten gezeigt.
+- Dateien lassen sich per Drag & Drop in das Chatfenster ziehen oder aus der Zwischenablage einfügen, auch mehrere auf einmal; zu große Dateien werden gemeldet.
+- Der Assistent beantwortet Bedienungsfragen aus der Hilfe & FAQ (neues Tool `help_lookup`, durchsucht die FAQ in der Sprache des Benutzers).
+- **Hilfe & FAQ** in der Seitenleiste: ausführliche Fragen und Antworten in Deutsch, Englisch und Französisch zu Bedienung, Agenten, Skills, KI-Modellen, Datenanbindung, Sicherheit und Administration, mit Suche und der Liste der aktiven Agenten und Skills.
+
+### Geändert
+- Standard-Skills und -Agenten heißen jetzt englisch (z. B. `excel-create`, `data-analyst`); bestehende Installationen werden beim Update automatisch umbenannt, Verweise in Agenten und Vorschlägen folgen.
+- Neue Seitenleiste: Suche in den Unterhaltungen, Einklappen auf Icons, Menüpunkte mit Icons, Gruppen „Verwaltung“ und „Unterhaltungen“, laufende Antworten mit Punkt markiert, Konto mit Avatar in der Fußzeile.
+
 ## [1.0.1] – 2026-09-09
 
 ### Behoben
