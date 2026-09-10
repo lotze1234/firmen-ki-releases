@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.8] – 2026-09-10
+
+### Geändert
+- Ticketsysteme (DocBee): Der Assistent kennt jetzt die Status (inkl. geschlossen/pausiert) und Prioritäten des angebundenen Systems aus dem Systemprompt und kann Fragen wie „Was wartet auf den Kunden?“ oder „Welche Tickets haben hohe Priorität?“ gezielt beantworten. Die Liste wird stündlich aktualisiert.
+
 ## [1.1.7] – 2026-09-10
 
 ### Neu
