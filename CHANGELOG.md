@@ -12,6 +12,12 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.5] – 2026-09-10
+
+### Geändert
+- Beim Öffnen der Updates-Seite wird sofort nach neuen Versionen gesucht (höchstens alle zwei Minuten, nicht während einer laufenden Installation); der Knopf „Jetzt prüfen“ bleibt für die manuelle Wiederholung.
+- Updates-Seite: Ist die Statusdatei des Updaters für die Anwendung nicht lesbar (Updater vor 1.0.1), erscheint ein Hinweis mit dem Befehl zur Behebung statt einer leeren Anzeige.
+
 ## [1.1.4] – 2026-09-10
 
 ### Behoben

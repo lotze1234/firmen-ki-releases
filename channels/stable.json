@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-09-10T08:48:19Z",
-  "latest": "1.1.4",
+  "generated_at": "2026-09-10T09:16:15Z",
+  "latest": "1.1.5",
   "releases": [
+    {
+      "version": "1.1.5",
+      "published_at": "2026-09-10T09:16:15Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.5",
+          "digest": "sha256:0e23feba75dad010f1d7d4acf6fd65c9d282bb58cad01091973f1ea3221df703",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Geändert\n- Beim Öffnen der Updates-Seite wird sofort nach neuen Versionen gesucht (höchstens alle zwei Minuten, nicht während einer laufenden Installation); der Knopf „Jetzt prüfen“ bleibt für die manuelle Wiederholung.\n- Updates-Seite: Ist die Statusdatei des Updaters für die Anwendung nicht lesbar (Updater vor 1.0.1), erscheint ein Hinweis mit dem Befehl zur Behebung statt einer leeren Anzeige.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.1.4",
       "published_at": "2026-09-10T08:48:19Z",
