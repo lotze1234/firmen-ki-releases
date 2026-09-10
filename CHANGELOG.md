@@ -12,6 +12,20 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.2.0] – 2026-09-10
+
+### Behoben
+- Updates-Seite zeigte nach einem abgeschlossenen Update die gerade installierte Version weiter als „verfügbar“ an (samt Zähler in der Seitenleiste). Jetzt gilt nur ein Release als verfügbar, das neuer als die laufende Version ist, und nach einem Update wird sofort neu geprüft.
+- Einstellungen → KI-Agent- und Skill-Verbesserung: Die Karten für Claude Code und Codex stehen untereinander, Knöpfe und Versionsangaben brechen nicht mehr um.
+
+### Neu
+- Hilfe & FAQ ergänzt (DE/EN/FR): Zeitangaben unter Antworten, Modellauswahl „Standard“, Cloud-Datenbanken mit SSL, Benutzerverzeichnis, Ablauf eines Updates mit Sperrbildschirm, Anmeldung von Claude Code/Codex.
+- **Benutzerverzeichnis für die KI**: Neues Werkzeug `list_users` (Name, E-Mail, Rolle, aktiv), damit der Assistent Fragen wie „Welche Benutzer gibt es?“ beantworten oder Kollegen-Adressen nachschlagen kann. Für Nicht-Admins nur mit dem Haken „Benutzerverzeichnis“ beim Benutzer.
+- **Datenzugriff je Benutzer**: Beim Anlegen oder Bearbeiten eines Benutzers legt der Administrator per Haken fest, auf welche angebundenen Quellen der Benutzer zugreifen darf (Dokumente, Datenbanken, DATEV, Server, Ticketsysteme). Ohne Haken hat ein Benutzer keinen Zugriff; Administratoren haben immer alle Quellen. Die Freigaben gelten für Unterhaltungen, Agenten, automatische Aufgaben und das Öffnen von Dokumenten.
+
+### Hinweise zum Update
+- Bestehende Benutzer ohne Administratorrolle verlieren mit diesem Update den Zugriff auf angebundene Quellen, bis ein Administrator unter Benutzer die entsprechenden Haken setzt.
+
 ## [1.1.9] – 2026-09-10
 
 ### Behoben
