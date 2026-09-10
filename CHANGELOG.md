@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.6] – 2026-09-10
+
+### Geändert
+- Modellauswahl in Unterhaltung, Agent und Aufgabe: Ist nur ein KI-Modell angebunden, erscheint nur noch „Standard (Name)“ statt zusätzlich desselben Modells als zweiter Eintrag.
+
+### Neu
+- **Datenanbindung → Datenbanken**: SSL-Modus wählbar (bevorzugt, erforderlich, mit Zertifikatsprüfung, aus). Cloud-Datenbanken wie Supabase lassen sich damit über den Connection-Pooler mit erzwungenem SSL anbinden; geprüft mit einer Supabase-Datenbank (Nur-Lese-Rolle, Port 6543).
+
 ## [1.1.5] – 2026-09-10
 
 ### Geändert
