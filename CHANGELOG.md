@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.3] – 2026-09-10
+
+### Behoben
+- „Verbindung testen“, „Modelle laden“ und „Testmail senden“ auf Bearbeiten-Seiten (KI-Modelle, Dokumente, Server, Ticketsysteme, E-Mail-Versand) lieferten „404 Not Found“, weil das Formular ein verstecktes `_method=patch` mitschickte. Beim Anlegen war der Test nicht betroffen.
+
 ## [1.1.2] – 2026-09-10
 
 ### Behoben
