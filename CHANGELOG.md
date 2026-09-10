@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.2] – 2026-09-10
+
+### Behoben
+- Neue Installation ohne API-Schlüssel des KI-Servers (Feld leer gelassen): Nach der Ersteinrichtung erschien Fehler 500, weil der leere Schlüssel an RubyLLM ging. Leere Werte aus der Umgebung werden jetzt wie „nicht gesetzt“ behandelt.
+
 ## [1.1.1] – 2026-09-10
 
 ### Neu

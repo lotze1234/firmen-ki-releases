@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-09-10T06:53:17Z",
-  "latest": "1.1.1",
+  "generated_at": "2026-09-10T07:45:49Z",
+  "latest": "1.1.2",
   "releases": [
+    {
+      "version": "1.1.2",
+      "published_at": "2026-09-10T07:45:49Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.2",
+          "digest": "sha256:029f2c33b820a7159b774daf9e59f247c24b9c6d3dcd8a5f1bf6f893c2daafbb",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.0",
+          "digest": "sha256:50664731cfcac1b045111ab0325a439e9539f3ff7cc5e6682d83329cf4b2128b"
+        }
+      },
+      "changelog": "### Behoben\n- Neue Installation ohne API-Schlüssel des KI-Servers (Feld leer gelassen): Nach der Ersteinrichtung erschien Fehler 500, weil der leere Schlüssel an RubyLLM ging. Leere Werte aus der Umgebung werden jetzt wie „nicht gesetzt“ behandelt.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.1.1",
       "published_at": "2026-09-10T06:53:17Z",
