@@ -12,6 +12,12 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.4] – 2026-09-10
+
+### Behoben
+- Leerer Wert für `LLM_REQUEST_TIMEOUT` (Standard bei neuen Installationen) ergab 0 Sekunden: Modell-Liste, Verbindungstest und Smoke-Test meldeten sofort „Zeitüberschreitung“. Leere Werte gelten jetzt als 600 Sekunden.
+- Updates-Seite zeigte nach dem Start eines Updates „500 Internal Server Error“, weil der Updater die Statusdatei `state/update.json` ohne Leserecht für die App anlegte. Die App verkraftet das jetzt; der Updater 1.0.1 schreibt die Datei lesbar.
+
 ## [1.1.3] – 2026-09-10
 
 ### Behoben
