@@ -12,6 +12,12 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.1] – 2026-09-10
+
+### Neu
+- **Datenanbindung → Ticketsysteme**: DocBee anbinden (Adresse, Benutzer/Passwort oder API-Token, Verbindungstest). Der Assistent sucht und liest Tickets mit Verlauf (Tools `ticket_search`, `ticket_get`) und darf nur mit „Schreiben erlauben“ Kommentare anfügen oder Tickets anlegen (`ticket_comment`, `ticket_create`); jeder Zugriff im Audit.
+- Unter jedem Eingabefeld steht der Hinweis „<App-Name> kann Fehler machen. Überprüfe wichtige Informationen.“ (Deutsch, Englisch, Französisch).
+
 ## [1.1.0] – 2026-09-09
 
 ### Neu
