@@ -12,6 +12,12 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.7] – 2026-09-10
+
+### Neu
+- Zeitmessung im Chat: Jeder Werkzeugaufruf zeigt seine Dauer, jede Antwort die Modellzeit des Schritts und am Ende die Gesamtzeit seit der Frage (Modell und Werkzeuge getrennt). Die Aktivitätsleiste zählt live mit, solange der Assistent arbeitet.
+- Während ein Update läuft, ist die Oberfläche für alle Benutzer gesperrt: Ein Sperrbildschirm zeigt Version und aktuellen Schritt, Nachrichten werden nicht angenommen, automatische Aufgaben warten. Nach dem Umschalten lädt die Seite von selbst neu.
+
 ## [1.1.6] – 2026-09-10
 
 ### Geändert
