@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.1.9] – 2026-09-10
+
+### Behoben
+- Einstellungen → KI-Agent- und Skill-Verbesserung: Nach „Bei Claude anmelden“ (ebenso Codex) blieb die Karte leer, statt Link zur Anmeldeseite und Code-Feld zu zeigen. Ursache war das automatische Nachladen der Karte.
+
 ## [1.1.8] – 2026-09-10
 
 ### Geändert
