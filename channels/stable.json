@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-09-11T07:09:24Z",
-  "latest": "1.3.1",
+  "generated_at": "2026-09-11T08:17:57Z",
+  "latest": "1.3.2",
   "releases": [
+    {
+      "version": "1.3.2",
+      "published_at": "2026-09-11T08:17:57Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.3.2",
+          "digest": "sha256:3a1d5da406d9120d25102487289e98632d05e0c73e5d585b2955242d4376b2b6",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Neu\n- Kunden-Wiki füllt sich von selbst: Nach jeder Antwort prüft der Assistent im Hintergrund, ob dauerhaftes Wissen über einen Kunden hervorging (Infrastruktur, Ansprechpartner, Abläufe, Lösungen), legt den Kunden bei Bedarf an und trägt Fakten und Notizen mit Quelle ein; fehlendes Wissen wird als KI-Frage gestellt. Eine kurze Meldung zeigt, was ergänzt wurde.\n\n### Entfernt\n- Knopf „Kunden aus dem Ticketsystem übernehmen“ im Kunden-Wiki – Kunden entstehen ausschließlich bei Bedarf.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.3.1",
       "published_at": "2026-09-11T07:09:24Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Geändert\n- Beim Öffnen der Updates-Seite wird sofort nach neuen Versionen gesucht (höchstens alle zwei Minuten, nicht während einer laufenden Installation); der Knopf „Jetzt prüfen“ bleibt für die manuelle Wiederholung.\n- Updates-Seite: Ist die Statusdatei des Updaters für die Anwendung nicht lesbar (Updater vor 1.0.1), erscheint ein Hinweis mit dem Befehl zur Behebung statt einer leeren Anzeige.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.1.4",
-      "published_at": "2026-09-10T08:48:19Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.4",
-          "digest": "sha256:1ec6d6b0ce6eb525e6893031a58cf6c00b0303cefa11a794c6a2ce6656527cd6",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Behoben\n- Leerer Wert für `LLM_REQUEST_TIMEOUT` (Standard bei neuen Installationen) ergab 0 Sekunden: Modell-Liste, Verbindungstest und Smoke-Test meldeten sofort „Zeitüberschreitung“. Leere Werte gelten jetzt als 600 Sekunden.\n- Updates-Seite zeigte nach dem Start eines Updates „500 Internal Server Error“, weil der Updater die Statusdatei `state/update.json` ohne Leserecht für die App anlegte. Die App verkraftet das jetzt; der Updater 1.0.1 schreibt die Datei lesbar.",
       "notes": {
         "expected_downtime_seconds": 60
       }

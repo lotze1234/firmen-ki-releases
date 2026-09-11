@@ -12,10 +12,18 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.3.2] – 2026-09-11
+
+### Neu
+- Kunden-Wiki füllt sich von selbst: Nach jeder Antwort prüft der Assistent im Hintergrund, ob dauerhaftes Wissen über einen Kunden hervorging (Infrastruktur, Ansprechpartner, Abläufe, Lösungen), legt den Kunden bei Bedarf an und trägt Fakten und Notizen mit Quelle ein; fehlendes Wissen wird als KI-Frage gestellt. Eine kurze Meldung zeigt, was ergänzt wurde.
+
+### Entfernt
+- Knopf „Kunden aus dem Ticketsystem übernehmen“ im Kunden-Wiki – Kunden entstehen ausschließlich bei Bedarf.
+
 ## [1.3.1] – 2026-09-11
 
 ### Geändert
-- Kunden-Wiki: Kunden entstehen bei Bedarf. Beim ersten Eintrag oder der ersten KI-Frage zu einem noch unbekannten Kunden legt der Assistent ihn automatisch an, mit Name und Kundennummer aus dem Ticketsystem (DocBee), wenn er dort existiert. Die Übernahme aller Kunden per Knopf bleibt optional.
+- Kunden-Wiki: Kunden entstehen bei Bedarf. Beim ersten Eintrag oder der ersten KI-Frage zu einem noch unbekannten Kunden legt der Assistent ihn automatisch an, mit Name und Kundennummer aus dem Ticketsystem (DocBee), wenn er dort existiert.
 
 ## [1.3.0] – 2026-09-11
 
