@@ -12,6 +12,12 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.2.1] – 2026-09-11
+
+### Behoben
+- Schleifenbremse für Werkzeuge: Ruft das Modell dasselbe Werkzeug dreimal in Folge mit denselben Parametern auf (bei lokalen Modellen etwa endloses Durchsuchen der Hilfe), bekommt es einen Hinweis statt eines Ergebnisses und antwortet dem Nutzer. Bisher lief die Antwort bis zum Tool-Limit weiter.
+- Benutzerverzeichnis: Die Anweisung an das Modell ist eindeutiger, damit Fragen nach „den Benutzern hier“ das Verzeichnis der Anwendung meinen und nicht Kunden aus Datenbanken oder Ticketsystemen.
+
 ## [1.2.0] – 2026-09-10
 
 ### Behoben

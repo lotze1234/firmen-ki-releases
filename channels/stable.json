@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-09-10T15:23:08Z",
-  "latest": "1.2.0",
+  "generated_at": "2026-09-11T06:07:37Z",
+  "latest": "1.2.1",
   "releases": [
+    {
+      "version": "1.2.1",
+      "published_at": "2026-09-11T06:07:37Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.2.1",
+          "digest": "sha256:72be705fed617c893069418032a43b441148282a57e173d33eb6d9acfe1ae2fd",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Behoben\n- Schleifenbremse für Werkzeuge: Ruft das Modell dasselbe Werkzeug dreimal in Folge mit denselben Parametern auf (bei lokalen Modellen etwa endloses Durchsuchen der Hilfe), bekommt es einen Hinweis statt eines Ergebnisses und antwortet dem Nutzer. Bisher lief die Antwort bis zum Tool-Limit weiter.\n- Benutzerverzeichnis: Die Anweisung an das Modell ist eindeutiger, damit Fragen nach „den Benutzern hier“ das Verzeichnis der Anwendung meinen und nicht Kunden aus Datenbanken oder Ticketsystemen.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.2.0",
       "published_at": "2026-09-10T15:23:08Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Behoben\n- Neue Installation ohne API-Schlüssel des KI-Servers (Feld leer gelassen): Nach der Ersteinrichtung erschien Fehler 500, weil der leere Schlüssel an RubyLLM ging. Leere Werte aus der Umgebung werden jetzt wie „nicht gesetzt“ behandelt.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.1.1",
-      "published_at": "2026-09-10T06:53:17Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.1",
-          "digest": "sha256:6914fbbeaed07dc695b4b40e3f527e1c7e5cc3866a1dd4e54cdc876441420856",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.0",
-          "digest": "sha256:50664731cfcac1b045111ab0325a439e9539f3ff7cc5e6682d83329cf4b2128b"
-        }
-      },
-      "changelog": "### Neu\n- **Datenanbindung → Ticketsysteme**: DocBee anbinden (Adresse, Benutzer/Passwort oder API-Token, Verbindungstest). Der Assistent sucht und liest Tickets mit Verlauf (Tools `ticket_search`, `ticket_get`) und darf nur mit „Schreiben erlauben“ Kommentare anfügen oder Tickets anlegen (`ticket_comment`, `ticket_create`); jeder Zugriff im Audit.\n- Unter jedem Eingabefeld steht der Hinweis „<App-Name> kann Fehler machen. Überprüfe wichtige Informationen.“ (Deutsch, Englisch, Französisch).",
       "notes": {
         "expected_downtime_seconds": 60
       }
