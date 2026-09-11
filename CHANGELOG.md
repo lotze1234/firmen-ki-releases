@@ -12,10 +12,15 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.3.1] – 2026-09-11
+
+### Geändert
+- Kunden-Wiki: Kunden entstehen bei Bedarf. Beim ersten Eintrag oder der ersten KI-Frage zu einem noch unbekannten Kunden legt der Assistent ihn automatisch an, mit Name und Kundennummer aus dem Ticketsystem (DocBee), wenn er dort existiert. Die Übernahme aller Kunden per Knopf bleibt optional.
+
 ## [1.3.0] – 2026-09-11
 
 ### Neu
-- **Kunden-Wiki** (Seitenleiste): Wissen je Kunde als Markdown-Seiten (Kategorie und Schlagwörter frei) und Fakten (Schlüssel–Wert), mit Versionsverlauf und Wiederherstellen, Suche über Seiten, Fakten und Kunden. Kunden per Knopf aus dem Ticketsystem (DocBee) übernehmen oder manuell anlegen; „Allgemein“ für kundenunabhängiges Wissen. Der Assistent liest vor Annahmen im Wiki nach (`wiki_search`, `wiki_read`) und trägt Neues mit Quelle ein (`wiki_write`); Passwörter werden abgewiesen.
+- **Kunden-Wiki** (Seitenleiste): Wissen je Kunde als Markdown-Seiten (Kategorie und Schlagwörter frei) und Fakten (Schlüssel–Wert), mit Versionsverlauf und Wiederherstellen, Suche über Seiten, Fakten und Kunden. Kunden entstehen bei Bedarf: Beim ersten Eintrag legt der Assistent den Kunden automatisch an (Name und Nummer aus DocBee, wenn dort vorhanden); alternativ Übernahme aller Kunden per Knopf oder manuelles Anlegen. „Allgemein“ für kundenunabhängiges Wissen. Der Assistent liest vor Annahmen im Wiki nach (`wiki_search`, `wiki_read`) und trägt Neues mit Quelle ein (`wiki_write`); Passwörter werden abgewiesen.
 - **KI-Fragen** (Seitenleiste mit Zähler): Fehlt dem Assistenten Wissen, stellt er eine Frage (`wiki_ask`) an einen Benutzer oder an alle mit Wiki-Zugriff. Antworten fließen automatisch ins Wiki, als Fakt oder auf die Seite „Fragen & Antworten“. Auch Benutzer können Kollegen fragen.
 - Haken „Kunden-Wiki“ beim Benutzer (Datenzugriff); Administratoren haben immer Zugriff.
 
