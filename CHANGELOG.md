@@ -12,6 +12,19 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.3.0] – 2026-09-11
+
+### Neu
+- **Kunden-Wiki** (Seitenleiste): Wissen je Kunde als Markdown-Seiten (Kategorie und Schlagwörter frei) und Fakten (Schlüssel–Wert), mit Versionsverlauf und Wiederherstellen, Suche über Seiten, Fakten und Kunden. Kunden per Knopf aus dem Ticketsystem (DocBee) übernehmen oder manuell anlegen; „Allgemein“ für kundenunabhängiges Wissen. Der Assistent liest vor Annahmen im Wiki nach (`wiki_search`, `wiki_read`) und trägt Neues mit Quelle ein (`wiki_write`); Passwörter werden abgewiesen.
+- **KI-Fragen** (Seitenleiste mit Zähler): Fehlt dem Assistenten Wissen, stellt er eine Frage (`wiki_ask`) an einen Benutzer oder an alle mit Wiki-Zugriff. Antworten fließen automatisch ins Wiki, als Fakt oder auf die Seite „Fragen & Antworten“. Auch Benutzer können Kollegen fragen.
+- Haken „Kunden-Wiki“ beim Benutzer (Datenzugriff); Administratoren haben immer Zugriff.
+
+### Behoben
+- Benutzer löschen schlug fehl, sobald der Benutzer Gedächtnis-Einträge hatte (Fehler 500). Die persönlichen Einträge werden jetzt mit dem Benutzer entfernt, gemeinsame bleiben.
+
+### Geändert
+- Gedächtnis: Einträge werden in einem mitwachsenden mehrzeiligen Feld angezeigt und bearbeitet, lange Texte sind vollständig lesbar statt abgeschnitten.
+
 ## [1.2.1] – 2026-09-11
 
 ### Behoben
