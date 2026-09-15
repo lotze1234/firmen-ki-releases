@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.4.0] – 2026-09-15
+
+### Neu
+- **ecoDMS-Anbindung** (Datenanbindung → ecoDMS): Firmen-KI verbindet sich mit dem API REST Service eines ecoDMS-Archivs (Adresse mit API-Port, Archiv-ID, Benutzer/Passwort, optional API-Schlüssel bei Multi-Faktor-Authentifizierung). Der Assistent kennt Ordner, Dokumentenarten, Status und die eigenen Klassifizierungsattribute des Kunden (`ecodms_describe`), sucht Dokumente per Volltext, Bemerkung, Ordner, Dokumentenart, Status, Zeitraum und Attributen (`ecodms_search`) und lädt Dateien nur bei Bedarf zum Auswerten in den Arbeitsbereich (`ecodms_get`). Archivieren neuer Dokumente samt Klassifizierung (`ecodms_upload`) nur, wenn „Archivieren erlauben“ gesetzt ist. Freigabe je Benutzer unter Benutzer → Datenzugriff, Katalog wird stündlich aktualisiert, jeder Zugriff steht im Audit.
+
+### Hinweise zum Update
+- Für ecoDMS muss der API REST Service im ecoDMS-Client aktiviert sein (Einstellungen → Web / API → API Zugriff → „Dienst starten“, Standardport 8180). Downloads und Uploads verbrauchen API-Connects aus dem ecoDMS-Lizenzkontingent.
+
 ## [1.3.2] – 2026-09-11
 
 ### Neu

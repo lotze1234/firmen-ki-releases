@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-09-11T08:17:57Z",
-  "latest": "1.3.2",
+  "generated_at": "2026-09-15T11:12:45Z",
+  "latest": "1.4.0",
   "releases": [
+    {
+      "version": "1.4.0",
+      "published_at": "2026-09-15T11:12:45Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.4.0",
+          "digest": "sha256:63beb5373fbc6f8063dbfe17ba982b1e3617e9c9eccb44af125dd863b811c876",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Neu\n- **ecoDMS-Anbindung** (Datenanbindung → ecoDMS): Firmen-KI verbindet sich mit dem API REST Service eines ecoDMS-Archivs (Adresse mit API-Port, Archiv-ID, Benutzer/Passwort, optional API-Schlüssel bei Multi-Faktor-Authentifizierung). Der Assistent kennt Ordner, Dokumentenarten, Status und die eigenen Klassifizierungsattribute des Kunden (`ecodms_describe`), sucht Dokumente per Volltext, Bemerkung, Ordner, Dokumentenart, Status, Zeitraum und Attributen (`ecodms_search`) und lädt Dateien nur bei Bedarf zum Auswerten in den Arbeitsbereich (`ecodms_get`). Archivieren neuer Dokumente samt Klassifizierung (`ecodms_upload`) nur, wenn „Archivieren erlauben“ gesetzt ist. Freigabe je Benutzer unter Benutzer → Datenzugriff, Katalog wird stündlich aktualisiert, jeder Zugriff steht im Audit.\n\n### Hinweise zum Update\n- Für ecoDMS muss der API REST Service im ecoDMS-Client aktiviert sein (Einstellungen → Web / API → API Zugriff → „Dienst starten“, Standardport 8180). Downloads und Uploads verbrauchen API-Connects aus dem ecoDMS-Lizenzkontingent.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.3.2",
       "published_at": "2026-09-11T08:17:57Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Geändert\n- Modellauswahl in Unterhaltung, Agent und Aufgabe: Ist nur ein KI-Modell angebunden, erscheint nur noch „Standard (Name)“ statt zusätzlich desselben Modells als zweiter Eintrag.\n\n### Neu\n- **Datenanbindung → Datenbanken**: SSL-Modus wählbar (bevorzugt, erforderlich, mit Zertifikatsprüfung, aus). Cloud-Datenbanken wie Supabase lassen sich damit über den Connection-Pooler mit erzwungenem SSL anbinden; geprüft mit einer Supabase-Datenbank (Nur-Lese-Rolle, Port 6543).",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.1.5",
-      "published_at": "2026-09-10T09:16:15Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.5",
-          "digest": "sha256:0e23feba75dad010f1d7d4acf6fd65c9d282bb58cad01091973f1ea3221df703",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Geändert\n- Beim Öffnen der Updates-Seite wird sofort nach neuen Versionen gesucht (höchstens alle zwei Minuten, nicht während einer laufenden Installation); der Knopf „Jetzt prüfen“ bleibt für die manuelle Wiederholung.\n- Updates-Seite: Ist die Statusdatei des Updaters für die Anwendung nicht lesbar (Updater vor 1.0.1), erscheint ein Hinweis mit dem Befehl zur Behebung statt einer leeren Anzeige.",
       "notes": {
         "expected_downtime_seconds": 60
       }
