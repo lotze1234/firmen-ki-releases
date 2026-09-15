@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-09-15T11:12:45Z",
-  "latest": "1.4.0",
+  "generated_at": "2026-09-15T12:48:01Z",
+  "latest": "1.4.1",
   "releases": [
+    {
+      "version": "1.4.1",
+      "published_at": "2026-09-15T12:48:01Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.4.1",
+          "digest": "sha256:85c6b77d4fea4b8497f5e51ea9b183c4d0bfbea3d05c24b726cb9bf295a559f0",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Behoben\n- ecoDMS: Ein aus dem Archiv geladenes Dokument (`ecodms_get` mit Download) erscheint jetzt sofort als Download im Chat. Bisher lag die Datei nur im Arbeitsbereich des Assistenten und ließ sich nicht herunterladen.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.4.0",
       "published_at": "2026-09-15T11:12:45Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Neu\n- Zeitmessung im Chat: Jeder Werkzeugaufruf zeigt seine Dauer, jede Antwort die Modellzeit des Schritts und am Ende die Gesamtzeit seit der Frage (Modell und Werkzeuge getrennt). Die Aktivitätsleiste zählt live mit, solange der Assistent arbeitet.\n- Während ein Update läuft, ist die Oberfläche für alle Benutzer gesperrt: Ein Sperrbildschirm zeigt Version und aktuellen Schritt, Nachrichten werden nicht angenommen, automatische Aufgaben warten. Nach dem Umschalten lädt die Seite von selbst neu.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.1.6",
-      "published_at": "2026-09-10T09:57:44Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.6",
-          "digest": "sha256:c10168bcea6af405d559f2ceca20ad04202752d703a1d57960e4390293212a71",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Geändert\n- Modellauswahl in Unterhaltung, Agent und Aufgabe: Ist nur ein KI-Modell angebunden, erscheint nur noch „Standard (Name)“ statt zusätzlich desselben Modells als zweiter Eintrag.\n\n### Neu\n- **Datenanbindung → Datenbanken**: SSL-Modus wählbar (bevorzugt, erforderlich, mit Zertifikatsprüfung, aus). Cloud-Datenbanken wie Supabase lassen sich damit über den Connection-Pooler mit erzwungenem SSL anbinden; geprüft mit einer Supabase-Datenbank (Nur-Lese-Rolle, Port 6543).",
       "notes": {
         "expected_downtime_seconds": 60
       }

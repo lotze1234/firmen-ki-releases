@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.4.1] – 2026-09-15
+
+### Behoben
+- ecoDMS: Ein aus dem Archiv geladenes Dokument (`ecodms_get` mit Download) erscheint jetzt sofort als Download im Chat. Bisher lag die Datei nur im Arbeitsbereich des Assistenten und ließ sich nicht herunterladen.
+
 ## [1.4.0] – 2026-09-15
 
 ### Neu
