@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-09-15T12:48:01Z",
-  "latest": "1.4.1",
+  "generated_at": "2026-09-15T13:22:05Z",
+  "latest": "1.5.0",
   "releases": [
+    {
+      "version": "1.5.0",
+      "published_at": "2026-09-15T13:22:05Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.5.0",
+          "digest": "sha256:5c4278a89b0a673100613d8640d3d3c092b64042a19574de840c82f9d2c7ca32",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.1",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
+          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
+        }
+      },
+      "changelog": "### Neu\n- **MailStore-Anbindung** (Datenanbindung → MailStore): Firmen-KI liest das E-Mail-Archiv über den in MailStore integrierten IMAP-Server (TLS oder STARTTLS, Rechte des eingetragenen MailStore-Benutzers, nur lesend). Der Assistent kennt die Ordner (`mailstore_folders`), sucht E-Mails nach Suchtext, Betreff, Absender, Empfänger und Zeitraum (`mailstore_search`) und liest einzelne E-Mails mit Text und Anhängen (`mailstore_get`); Anhänge oder die ganze E-Mail als .eml erscheinen auf Wunsch als Download im Chat. Freigabe je Benutzer unter Benutzer → Datenzugriff, Ordnerliste wird stündlich aktualisiert, jeder Zugriff steht im Audit.\n\n### Hinweise zum Update\n- Für MailStore muss in der MailStore Server Service Configuration der IMAP-Server (SSL, Port 993, oder STARTTLS, Port 143) aktiviert sein. Der KI-Benutzer braucht eine MailStore-eigene Anmeldung (bei MFA ein App-Passwort); Anmeldung über Microsoft 365, Google Workspace oder AD FS funktioniert per IMAP nicht.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.4.1",
       "published_at": "2026-09-15T12:48:01Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Geändert\n- Ticketsysteme (DocBee): Der Assistent kennt jetzt die Status (inkl. geschlossen/pausiert) und Prioritäten des angebundenen Systems aus dem Systemprompt und kann Fragen wie „Was wartet auf den Kunden?“ oder „Welche Tickets haben hohe Priorität?“ gezielt beantworten. Die Liste wird stündlich aktualisiert.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.1.7",
-      "published_at": "2026-09-10T10:52:02Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.1.7",
-          "digest": "sha256:6374d5d93b99a518b3426c3eafcf4b3079b20aa213e4cbe39e3d8ba454cefb7d",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Neu\n- Zeitmessung im Chat: Jeder Werkzeugaufruf zeigt seine Dauer, jede Antwort die Modellzeit des Schritts und am Ende die Gesamtzeit seit der Frage (Modell und Werkzeuge getrennt). Die Aktivitätsleiste zählt live mit, solange der Assistent arbeitet.\n- Während ein Update läuft, ist die Oberfläche für alle Benutzer gesperrt: Ein Sperrbildschirm zeigt Version und aktuellen Schritt, Nachrichten werden nicht angenommen, automatische Aufgaben warten. Nach dem Umschalten lädt die Seite von selbst neu.",
       "notes": {
         "expected_downtime_seconds": 60
       }

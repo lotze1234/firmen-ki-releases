@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.5.0] – 2026-09-15
+
+### Neu
+- **MailStore-Anbindung** (Datenanbindung → MailStore): Firmen-KI liest das E-Mail-Archiv über den in MailStore integrierten IMAP-Server (TLS oder STARTTLS, Rechte des eingetragenen MailStore-Benutzers, nur lesend). Der Assistent kennt die Ordner (`mailstore_folders`), sucht E-Mails nach Suchtext, Betreff, Absender, Empfänger und Zeitraum (`mailstore_search`) und liest einzelne E-Mails mit Text und Anhängen (`mailstore_get`); Anhänge oder die ganze E-Mail als .eml erscheinen auf Wunsch als Download im Chat. Freigabe je Benutzer unter Benutzer → Datenzugriff, Ordnerliste wird stündlich aktualisiert, jeder Zugriff steht im Audit.
+
+### Hinweise zum Update
+- Für MailStore muss in der MailStore Server Service Configuration der IMAP-Server (SSL, Port 993, oder STARTTLS, Port 143) aktiviert sein. Der KI-Benutzer braucht eine MailStore-eigene Anmeldung (bei MFA ein App-Passwort); Anmeldung über Microsoft 365, Google Workspace oder AD FS funktioniert per IMAP nicht.
+
 ## [1.4.1] – 2026-09-15
 
 ### Behoben
