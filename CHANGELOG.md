@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.5.1] – 2026-09-16
+
+### Neu
+- ecoDMS und MailStore: Feld „CA-Zertifikat (PEM)“ je Verbindung. Wer ein selbst signiertes oder firmeninternes Zertifikat einsetzt, trägt es (oder die Firmen-CA) dort ein und lässt „TLS-Zertifikat prüfen“ eingeschaltet, statt die Prüfung abzuschalten.
+
+### Geändert
+- ecoDMS: Formular und Übersicht erklären den verschlüsselten Zugriff (in ecoDMS „TLS (SSL)“ aktivieren, Adresse mit `https://`); die Übersicht zeigt je Verbindung, ob TLS mit Prüfung, TLS ohne Prüfung oder unverschlüsselt verwendet wird.
+
 ## [1.5.0] – 2026-09-15
 
 ### Neu
