@@ -12,6 +12,23 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.5.3] – 2026-09-21
+
+### Behoben
+- Agenten und Datenanbindungen: Ein vom Assistenten angelegter Agent meldete, der Zugriff auf das Ticketsystem (z. B. DocBee) sei „in der Laufumgebung nicht angekommen“. Ursache: Der Agent hatte die Ticket-Tools nicht erhalten, bekam das Ticketsystem aber trotzdem beschrieben. Jetzt gibt der Assistent beim Anlegen die passenden Tools mit und nennt, welche Datenanbindungen der Agent erreicht; ein Agent bekommt nur noch die Anbindungen beschrieben, für die er Tools hat, und sagt sonst klar, welches Tool fehlt. Bestehende Agenten: unter **Agenten → Bearbeiten** die Tools der gewünschten Datenanbindung anhaken. (Version 1.5.2 mit derselben Korrektur wurde nicht veröffentlicht.)
+
+### Geändert
+- Agenten bearbeiten: Die Tool-Auswahl ist in „Allgemein“ und „Datenanbindungen“ gegliedert, mit Hinweis, dass ein Agent nur über diese Tools auf Ticketsysteme, ecoDMS, MailStore, Datenbanken, DATEV, Dokumente und Server zugreift.
+- Updates: Stellt ein künftiges Update die Datenbank grundlegend um, hält der Updater die Anwendung vor dem Backup an und stellt bei einem Fehler der Umstellung den Stand des Backups wieder her. Das bereitet das nächste größere Update vor; bei gewöhnlichen Updates ändert sich nichts.
+
+## [1.5.2] – 2026-09-21
+
+### Behoben
+- Agenten und Datenanbindungen: Ein vom Assistenten angelegter Agent meldete, der Zugriff auf das Ticketsystem (z. B. DocBee) sei „in der Laufumgebung nicht angekommen“. Ursache: Der Agent hatte die Ticket-Tools nicht erhalten, bekam das Ticketsystem aber trotzdem beschrieben. Jetzt gibt der Assistent beim Anlegen die passenden Tools mit und nennt, welche Datenanbindungen der Agent erreicht; ein Agent bekommt nur noch die Anbindungen beschrieben, für die er Tools hat, und sagt sonst klar, welches Tool fehlt. Bestehende Agenten: unter **Agenten → Bearbeiten** die Tools der gewünschten Datenanbindung anhaken.
+
+### Geändert
+- Agenten bearbeiten: Die Tool-Auswahl ist in „Allgemein“ und „Datenanbindungen“ gegliedert, mit Hinweis, dass ein Agent nur über diese Tools auf Ticketsysteme, ecoDMS, MailStore, Datenbanken, DATEV, Dokumente und Server zugreift.
+
 ## [1.5.1] – 2026-09-16
 
 ### Neu
