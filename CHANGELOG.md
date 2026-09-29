@@ -12,6 +12,15 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.6.0] – 2026-09-29
+
+### Neu
+- **Ticketsysteme – ganze Schnittstelle nutzbar**: Der Assistent erreicht jetzt alle Endpunkte, die die Schnittstelle des angebundenen Ticketsystems (z. B. DocBee) anbietet, nicht nur Tickets und Kommentare. Er kann damit zum Beispiel den Bearbeiter eines Tickets ändern, Leistungen anlegen oder Planungszeiten eintragen. Neue Tools: `ticket_api_describe` (Endpunkte und Felder nachschlagen), `ticket_api_get` (lesen), `ticket_api_write` (anlegen und ändern, nur mit „Schreiben erlauben“) und `ticket_api_delete` (löschen).
+- **Ticketsysteme – Schalter „Löschen erlauben“**: Löschen ist ein eigener Schalter je Ticketsystem, standardmäßig aus, und wirkt nur zusammen mit „Schreiben erlauben“. Der Assistent löscht nur auf ausdrücklichen Wunsch und immer nur einen Datensatz. Jeder Aufruf steht im Audit.
+
+### Hinweise zum Update
+- Ticketsysteme: Nach dem Update kann der Assistent über die Schnittstelle alles lesen, was der angebundene Benutzer im Ticketsystem sehen darf, und bei gesetztem „Schreiben erlauben“ auch alles ändern, was dieser Benutzer ändern darf. Bitte die Rechte dieses Benutzers im Ticketsystem prüfen und knapp halten. Bestehende Agenten bekommen die neuen Tools erst, wenn ein Administrator sie unter Agenten → Bearbeiten anhakt.
+
 ## [1.5.3] – 2026-09-21
 
 ### Behoben
