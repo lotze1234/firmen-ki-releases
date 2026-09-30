@@ -12,6 +12,15 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.7.0] – 2026-09-30
+
+### Neu
+- **Meine Postfächer**: Jeder Benutzer kann eigene Postfächer anbinden – per IMAP (Server, Benutzer, Passwort bzw. App-Passwort) oder mit „Mit Microsoft 365 anmelden“ im Browser. Der Assistent durchsucht sie nur lesend und nur in den Unterhaltungen, Agenten und Aufgaben des Besitzers (Tools `mailbox_folders`, `mailbox_search`, `mailbox_get`); es wird keine Kopie der E-Mails gespeichert. Niemand sonst, auch kein Administrator, sieht fremde Postfächer, Zugangsdaten oder Inhalte.
+- **Einstellungen → Persönliche Postfächer**: Schalter, ob Benutzer eigene Postfächer anbinden dürfen (Standard: ja), und die Microsoft-365-App-Registrierung (Mandanten-ID, Anwendungs-ID, geheimer Clientschlüssel) für die Anmeldung der Benutzer. Ohne App-Registrierung steht IMAP zur Verfügung.
+
+### Hinweise zum Update
+- Persönliche Postfächer sind nach dem Update für alle Benutzer freigegeben. Wer das nicht will, schaltet es unter Einstellungen → Persönliche Postfächer ab. Für Microsoft 365 ist in Microsoft Entra eine App-Registrierung mit Umleitungs-URI `https://<Adresse der Anwendung>/postfaecher/m365/callback` und den delegierten Berechtigungen User.Read, Mail.Read und offline_access nötig.
+
 ## [1.6.0] – 2026-09-29
 
 ### Neu

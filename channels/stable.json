@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-09-29T11:41:36Z",
-  "latest": "1.6.0",
+  "generated_at": "2026-09-30T19:00:03Z",
+  "latest": "1.7.0",
   "releases": [
+    {
+      "version": "1.7.0",
+      "published_at": "2026-09-30T19:00:03Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.7.0",
+          "digest": "sha256:7907e786c08199e8dbece133aa608a655f7738070304567bdb13648d5803fa2c",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.2",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
+          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
+        }
+      },
+      "changelog": "### Neu\n- **Meine Postfächer**: Jeder Benutzer kann eigene Postfächer anbinden – per IMAP (Server, Benutzer, Passwort bzw. App-Passwort) oder mit „Mit Microsoft 365 anmelden“ im Browser. Der Assistent durchsucht sie nur lesend und nur in den Unterhaltungen, Agenten und Aufgaben des Besitzers (Tools `mailbox_folders`, `mailbox_search`, `mailbox_get`); es wird keine Kopie der E-Mails gespeichert. Niemand sonst, auch kein Administrator, sieht fremde Postfächer, Zugangsdaten oder Inhalte.\n- **Einstellungen → Persönliche Postfächer**: Schalter, ob Benutzer eigene Postfächer anbinden dürfen (Standard: ja), und die Microsoft-365-App-Registrierung (Mandanten-ID, Anwendungs-ID, geheimer Clientschlüssel) für die Anmeldung der Benutzer. Ohne App-Registrierung steht IMAP zur Verfügung.\n\n### Hinweise zum Update\n- Persönliche Postfächer sind nach dem Update für alle Benutzer freigegeben. Wer das nicht will, schaltet es unter Einstellungen → Persönliche Postfächer ab. Für Microsoft 365 ist in Microsoft Entra eine App-Registrierung mit Umleitungs-URI `https://<Adresse der Anwendung>/postfaecher/m365/callback` und den delegierten Berechtigungen User.Read, Mail.Read und offline_access nötig.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.6.0",
       "published_at": "2026-09-29T11:41:36Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Neu\n- **Kunden-Wiki** (Seitenleiste): Wissen je Kunde als Markdown-Seiten (Kategorie und Schlagwörter frei) und Fakten (Schlüssel–Wert), mit Versionsverlauf und Wiederherstellen, Suche über Seiten, Fakten und Kunden. Kunden per Knopf aus dem Ticketsystem (DocBee) übernehmen oder manuell anlegen; „Allgemein“ für kundenunabhängiges Wissen. Der Assistent liest vor Annahmen im Wiki nach (`wiki_search`, `wiki_read`) und trägt Neues mit Quelle ein (`wiki_write`); Passwörter werden abgewiesen.\n- **KI-Fragen** (Seitenleiste mit Zähler): Fehlt dem Assistenten Wissen, stellt er eine Frage (`wiki_ask`) an einen Benutzer oder an alle mit Wiki-Zugriff. Antworten fließen automatisch ins Wiki, als Fakt oder auf die Seite „Fragen & Antworten“. Auch Benutzer können Kollegen fragen.\n- Haken „Kunden-Wiki“ beim Benutzer (Datenzugriff); Administratoren haben immer Zugriff.\n\n### Behoben\n- Benutzer löschen schlug fehl, sobald der Benutzer Gedächtnis-Einträge hatte (Fehler 500). Die persönlichen Einträge werden jetzt mit dem Benutzer entfernt, gemeinsame bleiben.\n\n### Geändert\n- Gedächtnis: Einträge werden in einem mitwachsenden mehrzeiligen Feld angezeigt und bearbeitet, lange Texte sind vollständig lesbar statt abgeschnitten.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.2.1",
-      "published_at": "2026-09-11T06:07:37Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.2.1",
-          "digest": "sha256:72be705fed617c893069418032a43b441148282a57e173d33eb6d9acfe1ae2fd",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Behoben\n- Schleifenbremse für Werkzeuge: Ruft das Modell dasselbe Werkzeug dreimal in Folge mit denselben Parametern auf (bei lokalen Modellen etwa endloses Durchsuchen der Hilfe), bekommt es einen Hinweis statt eines Ergebnisses und antwortet dem Nutzer. Bisher lief die Antwort bis zum Tool-Limit weiter.\n- Benutzerverzeichnis: Die Anweisung an das Modell ist eindeutiger, damit Fragen nach „den Benutzern hier“ das Verzeichnis der Anwendung meinen und nicht Kunden aus Datenbanken oder Ticketsystemen.",
       "notes": {
         "expected_downtime_seconds": 60
       }
