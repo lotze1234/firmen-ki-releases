@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-09-30T19:00:03Z",
-  "latest": "1.7.0",
+  "generated_at": "2026-10-13T11:50:02Z",
+  "latest": "1.7.1",
   "releases": [
+    {
+      "version": "1.7.1",
+      "published_at": "2026-10-13T11:50:02Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.7.1",
+          "digest": "sha256:b2aa8e65111ff10b372de830d654f57aeec7dc91e54bfbe5ffd799e825f3eb99",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.2",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
+          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
+        }
+      },
+      "changelog": "### Geändert\n- Die herstellerinterne „KI-Agent- und Skill-Verbesserung“ (Claude Code/Codex) ist aus Kundeninstallationen\n  entfernt: kein Abschnitt mehr unter *Einstellungen*, keine Seite *Verbesserungen*, keine Knöpfe und keine\n  FAQ-Einträge dazu. Sie existiert nur noch in der Herstellerinstanz (`FIRMENKI_VENDOR=1`).\n\n### Behoben\n- Anmeldung bei Claude/ChatGPT blieb bei „Anmeldung wird vorbereitet“ stehen, wenn ein früherer Versuch noch lief\n  oder alle Hintergrund-Worker belegt waren. Die Anmeldung hat jetzt einen eigenen Worker, ein neuer Start löst einen\n  alten Versuch sofort ab, und die Karte zeigt an, worauf sie wartet. Die Schritte erklären jetzt auch, dass der\n  Bestätigungscode aus der E-Mail auf der Seite von Claude eingegeben wird.\n\n### Hinweise zum Update\n- Nur Herstellerinstanz: vor dem Update `FIRMENKI_VENDOR=1` in `.env` eintragen, sonst ist die\n  KI-Agent- und Skill-Verbesserung danach ausgeblendet. Kundeninstallationen müssen nichts tun.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.7.0",
       "published_at": "2026-09-30T19:00:03Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Geändert\n- Kunden-Wiki: Kunden entstehen bei Bedarf. Beim ersten Eintrag oder der ersten KI-Frage zu einem noch unbekannten Kunden legt der Assistent ihn automatisch an, mit Name und Kundennummer aus dem Ticketsystem (DocBee), wenn er dort existiert. Die Übernahme aller Kunden per Knopf bleibt optional.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.3.0",
-      "published_at": "2026-09-11T06:49:25Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.3.0",
-          "digest": "sha256:7fcf9573997987c86eb4738105cd652b9ec4737f5628e6adf680b2501d2c4e62",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Neu\n- **Kunden-Wiki** (Seitenleiste): Wissen je Kunde als Markdown-Seiten (Kategorie und Schlagwörter frei) und Fakten (Schlüssel–Wert), mit Versionsverlauf und Wiederherstellen, Suche über Seiten, Fakten und Kunden. Kunden per Knopf aus dem Ticketsystem (DocBee) übernehmen oder manuell anlegen; „Allgemein“ für kundenunabhängiges Wissen. Der Assistent liest vor Annahmen im Wiki nach (`wiki_search`, `wiki_read`) und trägt Neues mit Quelle ein (`wiki_write`); Passwörter werden abgewiesen.\n- **KI-Fragen** (Seitenleiste mit Zähler): Fehlt dem Assistenten Wissen, stellt er eine Frage (`wiki_ask`) an einen Benutzer oder an alle mit Wiki-Zugriff. Antworten fließen automatisch ins Wiki, als Fakt oder auf die Seite „Fragen & Antworten“. Auch Benutzer können Kollegen fragen.\n- Haken „Kunden-Wiki“ beim Benutzer (Datenzugriff); Administratoren haben immer Zugriff.\n\n### Behoben\n- Benutzer löschen schlug fehl, sobald der Benutzer Gedächtnis-Einträge hatte (Fehler 500). Die persönlichen Einträge werden jetzt mit dem Benutzer entfernt, gemeinsame bleiben.\n\n### Geändert\n- Gedächtnis: Einträge werden in einem mitwachsenden mehrzeiligen Feld angezeigt und bearbeitet, lange Texte sind vollständig lesbar statt abgeschnitten.",
       "notes": {
         "expected_downtime_seconds": 60
       }

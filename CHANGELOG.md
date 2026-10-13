@@ -12,6 +12,23 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.7.1] – 2026-10-13
+
+### Geändert
+- Die herstellerinterne „KI-Agent- und Skill-Verbesserung“ (Claude Code/Codex) ist aus Kundeninstallationen
+  entfernt: kein Abschnitt mehr unter *Einstellungen*, keine Seite *Verbesserungen*, keine Knöpfe und keine
+  FAQ-Einträge dazu. Sie existiert nur noch in der Herstellerinstanz (`FIRMENKI_VENDOR=1`).
+
+### Behoben
+- Anmeldung bei Claude/ChatGPT blieb bei „Anmeldung wird vorbereitet“ stehen, wenn ein früherer Versuch noch lief
+  oder alle Hintergrund-Worker belegt waren. Die Anmeldung hat jetzt einen eigenen Worker, ein neuer Start löst einen
+  alten Versuch sofort ab, und die Karte zeigt an, worauf sie wartet. Die Schritte erklären jetzt auch, dass der
+  Bestätigungscode aus der E-Mail auf der Seite von Claude eingegeben wird.
+
+### Hinweise zum Update
+- Nur Herstellerinstanz: vor dem Update `FIRMENKI_VENDOR=1` in `.env` eintragen, sonst ist die
+  KI-Agent- und Skill-Verbesserung danach ausgeblendet. Kundeninstallationen müssen nichts tun.
+
 ## [1.7.0] – 2026-09-30
 
 ### Neu
