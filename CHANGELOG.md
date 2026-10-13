@@ -12,6 +12,15 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.7.2] – 2026-10-13
+
+### Behoben
+- Die „KI-Agent- und Skill-Verbesserung“ ist wieder für alle Installationen da (in 1.7.1 versehentlich auf die
+  Herstellerinstanz beschränkt): Anmeldung unter *Einstellungen*, Seite *Verbesserungen*, Knöpfe auf Skill- und
+  Agenten-Seiten. Die Anmeldung gilt für die ganze Installation und nur für Administratoren. Claude Code bzw. Codex
+  überarbeitet ausschließlich Skills und Agenten und wird nie als Chat-Modell für Benutzer verwendet.
+  `FIRMENKI_VENDOR` wird nicht mehr benötigt.
+
 ## [1.7.1] – 2026-10-13
 
 ### Geändert
