@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.7.3] – 2026-10-15
+
+### Behoben
+- Antworten brachen mit „undefined method 'delete_prefix' for nil“ ab, wenn der KI-Server mitten im Stream einen
+  Fehler meldete und dessen Details in einem eigenen Netzwerk-Paket ankamen (häufig nach langen Agenten-Läufen).
+  Jetzt erscheint die eigentliche Meldung des Servers („Der KI-Server hat die Antwort mit einem Fehler
+  abgebrochen: …“), damit klar ist, was schiefging.
+
 ## [1.7.2] – 2026-10-13
 
 ### Behoben
