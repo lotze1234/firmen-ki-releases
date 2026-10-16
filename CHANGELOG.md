@@ -12,6 +12,14 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.7.4] – 2026-10-16
+
+### Geändert
+- Automatische Dokumentscans starten nur noch in einem Zeitfenster, standardmäßig nachts von 1 bis 6 Uhr
+  (*Einstellungen → Dokumentsuche*). Scans fordern viele Embeddings an; lief das Embedding-Modell auf demselben
+  KI-Server wie das Chat-Modell, konnten sie laufende Unterhaltungen abbrechen („Model is unloaded“).
+  „Jetzt scannen“ funktioniert weiterhin jederzeit.
+
 ## [1.7.3] – 2026-10-15
 
 ### Behoben

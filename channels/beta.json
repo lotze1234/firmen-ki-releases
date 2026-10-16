@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-10-15T11:24:45Z",
-  "latest": "1.7.3",
+  "generated_at": "2026-10-16T05:15:36Z",
+  "latest": "1.7.4",
   "releases": [
+    {
+      "version": "1.7.4",
+      "published_at": "2026-10-16T05:15:36Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.7.4",
+          "digest": "sha256:c7db8de032c002cd6da66c5066a2dfcd577c69441f405c03dd65978778dff692",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.2",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
+          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
+        }
+      },
+      "changelog": "### Geändert\n- Automatische Dokumentscans starten nur noch in einem Zeitfenster, standardmäßig nachts von 1 bis 6 Uhr\n  (*Einstellungen → Dokumentsuche*). Scans fordern viele Embeddings an; lief das Embedding-Modell auf demselben\n  KI-Server wie das Chat-Modell, konnten sie laufende Unterhaltungen abbrechen („Model is unloaded“).\n  „Jetzt scannen“ funktioniert weiterhin jederzeit.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.7.3",
       "published_at": "2026-10-15T11:24:45Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Behoben\n- ecoDMS: Ein aus dem Archiv geladenes Dokument (`ecodms_get` mit Download) erscheint jetzt sofort als Download im Chat. Bisher lag die Datei nur im Arbeitsbereich des Assistenten und ließ sich nicht herunterladen.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.4.0",
-      "published_at": "2026-09-15T11:12:45Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.4.0",
-          "digest": "sha256:63beb5373fbc6f8063dbfe17ba982b1e3617e9c9eccb44af125dd863b811c876",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Neu\n- **ecoDMS-Anbindung** (Datenanbindung → ecoDMS): Firmen-KI verbindet sich mit dem API REST Service eines ecoDMS-Archivs (Adresse mit API-Port, Archiv-ID, Benutzer/Passwort, optional API-Schlüssel bei Multi-Faktor-Authentifizierung). Der Assistent kennt Ordner, Dokumentenarten, Status und die eigenen Klassifizierungsattribute des Kunden (`ecodms_describe`), sucht Dokumente per Volltext, Bemerkung, Ordner, Dokumentenart, Status, Zeitraum und Attributen (`ecodms_search`) und lädt Dateien nur bei Bedarf zum Auswerten in den Arbeitsbereich (`ecodms_get`). Archivieren neuer Dokumente samt Klassifizierung (`ecodms_upload`) nur, wenn „Archivieren erlauben“ gesetzt ist. Freigabe je Benutzer unter Benutzer → Datenzugriff, Katalog wird stündlich aktualisiert, jeder Zugriff steht im Audit.\n\n### Hinweise zum Update\n- Für ecoDMS muss der API REST Service im ecoDMS-Client aktiviert sein (Einstellungen → Web / API → API Zugriff → „Dienst starten“, Standardport 8180). Downloads und Uploads verbrauchen API-Connects aus dem ecoDMS-Lizenzkontingent.",
       "notes": {
         "expected_downtime_seconds": 60
       }
