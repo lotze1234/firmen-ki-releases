@@ -12,6 +12,91 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.8.0-beta.2] – 2026-10-23
+
+### Neu
+- **Workflow-Karte**: Workflows bauen Sie jetzt auf einer Karte wie auf einer Folie. Agenten und Freigabe-Stopps lassen sich frei verschieben und per Ziehen vom Ausgangspunkt einer Karte zur nächsten verbinden (oder per Klick auf Ausgangs- und Eingangspunkt). Über den Knopf auf einer Linie fügen Sie dort einen Freigabe-Stopp ein oder lösen die Verbindung. Nicht verbundene Karten sind markiert, gespeichert wird nur eine durchgehende Kette. Zoom und „Alles einpassen“ helfen bei größeren Abläufen, die Anordnung wird mitgespeichert. Die bisherige Listenansicht bleibt per Umschalter erhalten (auf kleinen Bildschirmen Standard). Die Laufansicht zeigt den Ablauf als Live-Karte mit dem Status jedes Schritts.
+- **Workflows**: Unter *Workflows* in der Seitenleiste bauen Sie aus Agenten einen festen Ablauf. Links wählen Sie in der Palette Agenten
+  aus (per Klick, Enter oder Ziehen), rechts entsteht die Kette von oben nach unten; zu jedem Agenten schreiben Sie, was er mit dem
+  Ergebnis des vorigen Schritts tun soll. Ein **Freigabe-Stopp** hält den Ablauf zwischen zwei Schritten an. Der Editor warnt, wenn ein
+  Agent, der schreiben oder senden kann, keinen Freigabe-Stopp direkt vor sich hat. Persönliche Workflows sieht nur der Besitzer.
+  Gestartet wird per **Starten** mit Auftragstext und Dateien. Die Laufansicht zeigt live jeden Schritt mit Status, Aktivität, Antwort,
+  Dateien, Tokens und Kosten; bei einem Freigabe-Stopp geben Sie mit **Weiter** frei oder brechen ab, **Stopp** beendet einen laufenden
+  Lauf, und nach einem Fehler startet **Neu starten** einen neuen Lauf mit derselben Eingabe. Der Chat eines laufenden Workflows ist
+  bis zum Ende gesperrt. Administratoren geben eigene Workflows mit **Für alle freigeben** frei, sofern alle Agenten bereits für
+  alle freigegeben sind; ein Workflow läuft immer mit den Rechten des Startenden. Eine Videoanleitung erklärt das Bauen und Starten.
+  Der Freigabe-Stopp wirkt nur zwischen den Schritten. **Neu starten** ist gegen Doppelklick gesichert.
+  Workflows laufen auch **nach Zeitplan**: **Regelmäßig ausführen** in der Workflow-Übersicht (oder die Auswahl *Workflow* im Formular
+  unter *Aufgaben*) legt eine Aufgabe an, die den Workflow mit Ihren Rechten startet. Status und Meldungen erscheinen im Verlauf der
+  Aufgabe; bei einem Freigabe-Stopp zeigt die Seitenleiste die Zahl wartender Läufe, und wenn E-Mail-Versand eingerichtet ist, kommt
+  eine E-Mail mit dem Link zum Lauf. Wartende Läufe werden nach sieben Tagen beendet.
+  In **Central** zeigt der Abschnitt *Workflows* je Workflow Läufe, Erfolgsquote, durchschnittliche Dauer, Wartezeit auf Freigaben, Kosten
+  und einen 30-Tage-Verlauf; die Detailseite listet zusätzlich Fehler je Schritt und die Läufe (ohne Inhalte). Administratoren sehen nur
+  Zahlen, nie Inhalte fremder Läufe. Alle Nutzer erreichen über **Kennzahlen** in der Workflow-Übersicht die Seite mit ihren eigenen Läufen.
+  Jede Änderung an Name, Beschreibung oder Ablauf legt eine **Version** an; auf der Central-Seite des Workflows (Besitzer bzw. bei geteilten
+  Workflows Administratoren) sehen Sie den Verlauf mit Unterschied zu früheren Ständen und können einen älteren Stand **wiederherstellen**.
+  Geteilte Workflows lassen sich im Editor mit **Als Entwurf speichern** ändern, ohne dass der Live-Workflow etwas merkt: Der Entwurf wird mit
+  Testfällen getestet und dann live geschaltet (mit Warnung, wenn sich der Live-Stand inzwischen geändert hat, und optional nur nach
+  bestandenen Tests). **Testfälle** (Auftrag und Abnahmekriterien) werden mit **Alle testen** als Evaluation ausgeführt; ein Testlauf endet
+  am ersten Freigabe-Stopp und gibt ihn nie frei, bewertet wird das Zwischenergebnis.
+- **Hilfe auf jeder Seite**: Unten rechts sitzt ein animiertes Fragezeichen mit Sprechblase. Ein Klick zeigt die Hilfe zur aktuellen
+  Seite – passende Videoanleitungen zum direkten Abspielen und die wichtigsten Fragen mit Antworten – und führt auf Wunsch zur
+  vollständigen Hilfe.
+- **Videoanleitungen in der Hilfe**: Im Abschnitt „Agenten“ der Seite *Hilfe & FAQ* zeigen kurze Videos, wie man einen Agenten
+  im Chat nutzt und im Baukasten einen eigenen baut. Administratoren sehen zusätzlich Videos zu *Central* sowie zu Entwürfen, Live
+  schalten und Versionen. Die Videos gibt es auf Deutsch, Englisch und Französisch; die Schritte stehen zusätzlich als Text darunter.
+- **Entwürfe für geteilte Agenten**: Änderungen an einem geteilten Firmen-Agenten lassen sich als Entwurf speichern (Agenten-Formular,
+  Baukasten, Verbesserungsvorschlag „Als Entwurf übernehmen“), ohne dass der Agent live etwas merkt. In *Central* testen Administratoren
+  den Entwurf mit den Testfällen, sehen den Unterschied zum Live-Stand und schalten ihn live oder verwerfen ihn. Der Schalter
+  „Live nur nach bestandenen Tests“ sperrt die Freigabe, bis die letzte Evaluation des Entwurfs bestanden ist. Persönliche Agenten
+  sowie Standard- und Paket-Agenten haben keine Entwürfe.
+- **Testfälle für Agenten**: In *Central* lassen sich je Agent Testfälle anlegen (Aufgabe plus Abnahmekriterien), aus der letzten
+  automatischen Prüfung übernehmen oder vom Modell vorschlagen. „Alle testen“ führt die aktiven Testfälle nacheinander aus, ein
+  Prüfer bewertet jede Antwort. Das Ergebnis (bestanden x von y, Ø Score, getestete Version) steht im Verlauf der Evaluationen und in
+  der Übersicht als „Letzte Evaluation“. Persönliche Agenten werden immer mit den Rechten ihres Besitzers getestet.
+- **Versionen für Agenten**: Jede Änderung am Inhalt eines Agenten (Anweisungen, Tools, Skills, Modell) legt automatisch eine neue
+  Version an, egal ob per Formular, Baukasten, Verbesserungsvorschlag, Assistent oder automatischer Prüfung. In *Central* zeigt
+  die Detailseite des Agenten den Verlauf mit Datum, Herkunft und Autor; eine Version lässt sich mit den Unterschieden ansehen und
+  mit „Wiederherstellen“ zurückholen. Zeitplan und Prüfstatus bleiben dabei unverändert. Bestehende Agenten starten mit Version 1.
+- **Central (Kennzahlen)**: Neue Seite *Central* für Administratoren mit Läufen, Erfolgsquote, Ø Dauer, Tokens, Tool-Fehlerquote
+  und Kosten je Agent (7/30 Tage, Verlauf über 30 Tage). Benutzer sehen die Kennzahlen ihrer eigenen Agenten und nur ihre
+  eigenen Läufe. Kosten erscheinen nur, wenn unter *KI-Modelle* ein Preis je Million Tokens eingetragen ist. Prüf- und
+  Testunterhaltungen von Agenten erscheinen nicht mehr in der Chat-Liste. Die automatische Verbesserung wertet jetzt die
+  erfassten Läufe aus (viele Tool-Fehler oder viele fehlgeschlagene Läufe).
+- **Central: Oberfläche**: Übersicht mit Kennzahl-Kacheln, Tabelle je Agent mit Verlaufslinie und Umschalter 7/30 Tage; je Agent eine
+  Detailseite mit Tagesdiagramm (Läufe ohne und mit Fehler, Details beim Überfahren), Aufteilung nach Art, häufigsten Tool-Fehlern
+  und gefilterter Laufliste mit Link in die Unterhaltung. Unter *Agenten bauen* zeigt jeder eigene Agent Läufe und Erfolgsquote der
+  letzten 30 Tage. Unter *KI-Modelle* lassen sich Preise je 1 Mio. Tokens eintragen, damit Central Kosten anzeigt.
+- **Kennzahlen für Agenten**: Jeder Lauf eines Agenten (Chat, Delegation, Zeitplan, Ausprobieren, Prüfung) wird jetzt mit
+  Dauer, Tokens, Tool-Aufrufen und Ergebnis erfasst. Auf der Agenten-Seite erscheinen Läufe, Erfolgsquote, Ø Dauer und
+  Tokens der letzten 30 Tage; die Erfassung beginnt mit diesem Update (keine Rückwirkung).
+- **Agenten bauen**: Jeder Benutzer kann sich unter *Agenten bauen* per Drag & Drop einen eigenen Agenten aus Bausteinen
+  zusammenstellen (Rolle und Ziel, Auslöser, Wissen und Daten, Fähigkeiten, Arbeitsschritte, Regeln, Ausgabe), mit
+  Live-Vorschau, Expertenblick auf die erzeugten Anweisungen und „Speichern & ausprobieren“. Vorlagen erleichtern den Start.
+  Persönliche Agenten sieht nur ihr Besitzer; Administratoren können sie unter *Agenten* für alle freigeben.
+- Stichwörter und ein optionaler Zeitplan lassen sich im Baukasten direkt am Agenten festlegen.
+
+### Sicherheit
+- **Wiederherstellen ohne Rechteausweitung**: Nutzer ohne Administratorrechte können beim Wiederherstellen einer Agent-Version keine Tools oder Modelle mehr zurückholen, die ihnen nicht zustehen (Baukasten-Agenten werden aus dem Bauplan neu geprüft). Der Assistent darf bestehende geteilte Agenten nur noch für Administratoren ändern; gilt „Live nur nach bestandenen Tests“, wird die Änderung ein Entwurf.
+- **Entwürfe prüfen ihre Basis**: „Live schalten“ warnt, wenn sich der Live-Stand seit dem Anlegen des Entwurfs geändert hat, und überschreibt ihn nur nach ausdrücklicher Bestätigung. Die automatische Prüfung verwirft keinen fremden offenen Entwurf mehr und schaltet nie einen veralteten Entwurf live.
+- **Lastbegrenzung bei Evaluationen**: Evaluationen laufen in einer eigenen Warteschlange mit einem Thread; je Nutzer läuft höchstens eine, Nicht-Admins starten höchstens 20 pro Tag. „Testfall vorschlagen lassen“ ist auf 5 pro Minute begrenzt.
+- **Workflow-Läufe bleiben privat**: Die Unterhaltungen eines Workflow-Laufs (Haupt-Chat und Schritt-Chats) sieht und bearbeitet nur der Startende; auch Administratoren erhalten dort eine Fehlerseite und sehen keine Links, Werkzeugaufrufe oder Agentenlisten dazu.
+- **Workflows härter gegen Fehlbedienung**: Das Löschen eines geteilten Workflows entfernt nicht mehr den Verlauf der Nutzer (Läufe und Unterhaltungen bleiben erhalten, nur die Zeitpläne entfallen; die Rückfrage sagt das). Der Chat eines laufenden Workflows lässt sich auch nicht löschen und keine Dateien hinzufügen oder entfernen. Dateinamen und Marken in der Übergabe zwischen Schritten werden bereinigt, Agenten mit Internetzugriff tragen im Editor einen Hinweis auf möglichen Datenabfluss, und je Nutzer läuft höchstens ein Workflow-Schritt gleichzeitig. Aufgaben mit Workflow ändert, startet und liest nur ihr Besitzer (Administratoren können sie löschen), Inhalte aus Workflow-Läufen gehen nicht an die automatische Verbesserung, und beim Löschen eines Workflows werden aktive Läufe abgebrochen.
+- **Unterhaltungen bleiben privat, auch gegenüber Administratoren**: Administratoren öffnen Unterhaltungen anderer Benutzer nicht mehr. Im Audit, in Central, auf der Agentenseite, bei Aufgaben, Skill-Vorschlägen und Wiki-Fragen sehen sie bei fremden Unterhaltungen nur noch Benutzer, Zeitpunkt, Werkzeugnamen und Kennzahlen, aber keine Titel, Inhalte, Werkzeug-Argumente, Ergebnisse oder Links. Aufgaben anderer Benutzer können Administratoren nur noch pausieren oder löschen, aber nicht mehr ändern oder starten, und sie sehen deren Anweisungen nicht. Die automatische Verbesserung übergibt an das Entwicklerwerkzeug nur noch Texte aus Unterhaltungen des auslösenden Administrators, aus allen übrigen nur Kennzahlen. Persönliche Agenten anderer Benutzer können Administratoren nur noch ansehen, deaktivieren, löschen oder für alle freigeben, aber nicht mehr ändern, testen, wiederherstellen oder verbessern lassen; persönliche Agenten werden nur noch verbessert, wenn ihr Besitzer es selbst anstößt.
+
+### Geändert
+- Die automatische Prüfung bessert bei geteilten Agenten die Anweisungen nicht mehr direkt am Live-Agenten nach: Die Nachbesserung wird ein
+  Entwurf, der zweite Versuch läuft gegen den Entwurf, und nur ein bestandener Entwurf geht live (sofern die Sperre „Live nur nach
+  bestandenen Tests“ es erlaubt). Persönliche Agenten werden wie bisher direkt nachgebessert.
+- Agenten, die nur ihr Besitzer sieht, werden bei Auswahl, Delegation (`run_agent`), Zeitplänen und automatischem Routing
+  nur diesem angeboten; die Prüfung persönlicher Agenten (Freigabe, „Automatisch prüfen“) läuft mit den Rechten des Besitzers.
+- Der Assistent kann persönliche und im Baukasten gebaute Agenten nicht mehr per `create_agent` überschreiben; der Import
+  einer Agent-Datei über einen persönlichen Agenten wird abgelehnt.
+
+### Behoben
+- **Hilfe & FAQ**: Die Abschnitts-Links oben auf der Hilfe-Seite springen wieder zuverlässig zum Abschnitt; bisher sprang die Seite ab dem zweiten Klick nach oben zurück.
+- Agenten mit dem Tool `list_users` sehen das Benutzerverzeichnis nur noch, wenn der Benutzer dafür freigeschaltet ist.
+
 ## [1.7.4] – 2026-10-16
 
 ### Geändert
