@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-11-11T08:01:24Z",
-  "latest": "1.8.0-beta.3",
+  "generated_at": "2026-11-11T13:18:07Z",
+  "latest": "1.8.0-beta.4",
   "releases": [
+    {
+      "version": "1.8.0-beta.4",
+      "published_at": "2026-11-11T13:18:07Z",
+      "prerelease": true,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.8.0-beta.4",
+          "digest": "sha256:769046889c6c9c9cd8c14e2a2d165af001a1dc988760612cb96ea46cad50dbac",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.3",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.3",
+          "digest": "sha256:af1cdd8469e0738891f4af9ffc9762fb106b47470a433539dfc639af1658ebf6"
+        }
+      },
+      "changelog": "### Neu\n- **Outlook-Kalender lesen (Microsoft 365, nur lesend)**: Der Assistent kann Termine, Feiertage und Abwesenheiten aus dem eigenen Outlook-Kalender eines Benutzers lesen (Werkzeug `calendar_events`, Zeitraum bis 62 Tage; private und vertrauliche Termine nur mit Zeit, ohne Betreff). Die Funktion ist standardmäßig aus: Der Administrator aktiviert unter Einstellungen → Persönliche Postfächer „Kalender lesen“ und ergänzt in der Entra-App-Registrierung die delegierte Berechtigung `Calendars.Read`. Benutzer melden sich danach unter „Meine Postfächer“ einmal erneut mit Microsoft 365 an; bestehende Anmeldungen laufen unverändert weiter (nur Mail). Neue Spalten: `mailboxes.granted_scopes`, `app_settings.mailbox_calendar`.\n- **Monatliche Aufgaben**: Automatische Aufgaben lassen sich jetzt auch monatlich an einem Tag im Monat planen (Aufgaben-Formular, Agenten-Baukasten und im Chat: „jeden Monat am 1. um 7 Uhr“). Gibt es den Tag in einem Monat nicht (z. B. der 31.), läuft die Aufgabe am letzten Tag dieses Monats. Neue Spalte: `scheduled_tasks.day_of_month`.\n- **Vier Ebenen bei den Benutzern**: Eigentümer (Hauptadministrator), Administrator, Technik-Administrator (für einen externen IT-Dienstleister) und Benutzer. Der Technik-Administrator richtet KI-Modelle, Datenanbindungen, Updates, Status und die allgemeinen Einstellungen ein, sieht aber keine Inhalte (Dokumentsuche, Befehlsausgaben) und hat keinen Zugriff auf Benutzer, Skills, Agenten, Audit, Werkzeug-Richtlinien, Verbesserung, Postfächer/Kalender sowie Update-Kanal und Update-Adresse; Daten und Wiki nur über die Haken unter Benutzer → Datenzugriff. Administratoren verwalten nur Technik-Administratoren und Benutzer; Administratoren anlegen oder ändern und den Eigentümer-Status vergeben kann nur ein Eigentümer, und es bleibt immer mindestens ein aktiver Eigentümer. Neue Spalte: `users.owner`.\n- **Vertrauliche Kunden im Wiki**: Ein Administrator kann einen Kunden im Kunden-Wiki als „Vertraulich“ markieren und Benutzer dafür freigeben. Ein vertraulicher Kunde samt Seiten, Fakten und KI-Fragen ist nur für Administratoren und die freigegebenen Benutzer sichtbar – in Liste, Suche, Lesen, Schreiben und für den Assistenten (auch in Unter-Agenten, Aufgaben und Workflows); für alle anderen ist er nicht auffindbar und wird auch nicht automatisch angelegt oder befüllt. Technik-Administratoren sehen ihn nur mit Freigabe. Standard ist „nicht vertraulich“: ohne markierte Kunden ändert sich nichts. Neue Spalte: `wiki_customers.restricted`.\n\n### Sicherheit\n- **Umgezogene Verbindungen bleiben „wartet auf Freigabe“**: Legt ein Technik-Administrator eine Verbindung an oder ändert er deren Ziel (auch bei einer inaktiven Verbindung), bleibt sie persistent als „wartet auf Freigabe“ markiert – in Liste und Bearbeitungsformular zusammen mit dem aktuellen Ziel – bis ein Administrator sie aktiviert; dabei werden Schreib- und Löschschalter zurückgesetzt. Aktive Verbindungen löschen nur noch Administratoren. Die Modell-Liste einer KI-Anbindung wird bei geändertem Ziel nicht mehr gespeichert; Pfad, Datenbank und Adresse im Systemprompt werden bereinigt. Neue Spalte: `awaiting_activation` an den Verbindungstabellen.\n- **Technik-Administrator bereitet vor, Administrator schaltet frei**: Technik-Administratoren können KI-Modelle und alle Datenanbindungen (Dokumentquellen, Datenbanken, ecoDMS, MailStore, DATEV, Server, Ticketsysteme) anlegen (zunächst inaktiv, „wartet auf Freigabe durch einen Administrator“), Schlüssel, Modellliste und Grenzen ändern und die Verbindung testen. Aktivieren, als Standard setzen, als Anbindung für Embeddings wählen sowie Anbieter und Adresse einer bestehenden Anbindung ändern dürfen nur Administratoren; bei den Datenanbindungen darf ein Technik-Administrator das Ziel nur ändern, solange die Verbindung inaktiv bleibt (mit neu eingegebenem Passwort), und Deaktivieren bleibt jedem erlaubt. Inaktive Anbindungen werden nirgends verwendet. Die Beschreibung der Datenquellen (Dokumente, Datenbanken, ecoDMS, MailStore, Server, Ticketsysteme), die im Systemprompt steht, ändern ebenfalls nur Administratoren. Das Ziel des Mail-Versands (Versandart, SMTP-Server, Port, Benutzer, Verschlüsselung, Microsoft-365-Mandant und -Anwendungs-ID, Absender) und die Update-Quelle ändern nur Administratoren; ein Versuch eines Technik-Administrators wird mit Meldung abgelehnt, die Felder sind gesperrt. Passwort und Client-Secret dürfen sie für das unveränderte Ziel neu setzen.\n- **Systemprompt gehärtet**: Namen von Verbindungen und Quellen sind auf 80 Zeichen begrenzt (bei Änderung des Namens) und dürfen keine Steuerzeichen oder Zeilenumbrüche enthalten. Werte aus Fremdsystemen, die im Systemprompt stehen (Ticket-Status und -Prioritäten, Ordner und Dokumentenarten, Ressourcen), werden von Steuerzeichen befreit, auf 40 Zeichen gekürzt und in der Anzahl begrenzt. Die Ergebnisse der Werkzeuge bleiben unverändert.\n- Kalender: Termine mit anderer Vertraulichkeit als „normal“ (auch „persönlich“) werden ohne Betreff angezeigt; ist „Kalender lesen“ aus, wird die Kalender-Berechtigung bei der Token-Erneuerung nicht angefragt.\n- Verliert ein Benutzer den Wiki-Zugriff oder wird Administrator, entfallen seine Freigaben für vertrauliche Wiki-Kunden; bei erneutem Wiki-Zugriff müssen sie neu vergeben werden.\n- **Technik-Administrator kann gespeicherte Zugangsdaten nicht mehr umleiten**: Ändert ein Technik-Administrator das Ziel einer Verbindung (Server, Adresse, Port, Benutzer, Freigabe, Mandant, Zertifikat – bei KI-Modellen, Dokumentquellen, Datenbanken, ecoDMS, MailStore, DATEV, Servern, Ticketsystemen und Mail-Versand), muss er das Passwort, den Schlüssel oder das Token neu eingeben; das gilt auch für „Testen“. Befehlslisten der Server, Tabellen- und Schema-Listen der Datenbanken sowie Schreib- und Löschfreigaben (ecoDMS, DATEV, Ticketsysteme) ändern nur noch Administratoren.\n\n### Hinweise zum Update\n- **Kein späterer Rückschritt auf eine ältere Version ohne Backup**: Die Migrationen dieses Releases fügen nur Spalten mit Standardwerten hinzu und laufen auch mit dem Vorgängercode; schlägt das Update fehl, genügt der automatische Rückschritt des Images (er geschieht unmittelbar nach der Migration, wenn es noch keine vertraulichen Kunden und Technik-Administratoren gibt). Wer **später von Hand** auf eine ältere Version zurückgeht, macht vertrauliche Wiki-Kunden wieder für alle Wiki-Benutzer sichtbar, verliert die Eigentümer-Ebene und die Technik-Administratoren werden zu gewöhnlichen Benutzern. Das darf nur zusammen mit dem Backup von vor dem Update geschehen.\n- Beim Update wird der älteste aktive Administrator zum Eigentümer. Wer weitere Administratoren verwalten soll, braucht den Eigentümer-Status (Benutzer → Bearbeiten → Eigentümer, nur durch einen Eigentümer).\n- Technik-Administratoren müssen beim Ändern des Ziels einer Verbindung das Passwort bzw. den Schlüssel neu eingeben; Administratoren sind davon nicht betroffen. Vorhandene Wiki-Kunden bleiben unverändert sichtbar, bis ein Administrator sie als „Vertraulich“ markiert.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.8.0-beta.3",
       "published_at": "2026-11-11T08:01:24Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Behoben\n- Agenten und Datenanbindungen: Ein vom Assistenten angelegter Agent meldete, der Zugriff auf das Ticketsystem (z. B. DocBee) sei „in der Laufumgebung nicht angekommen“. Ursache: Der Agent hatte die Ticket-Tools nicht erhalten, bekam das Ticketsystem aber trotzdem beschrieben. Jetzt gibt der Assistent beim Anlegen die passenden Tools mit und nennt, welche Datenanbindungen der Agent erreicht; ein Agent bekommt nur noch die Anbindungen beschrieben, für die er Tools hat, und sagt sonst klar, welches Tool fehlt. Bestehende Agenten: unter **Agenten → Bearbeiten** die Tools der gewünschten Datenanbindung anhaken. (Version 1.5.2 mit derselben Korrektur wurde nicht veröffentlicht.)\n\n### Geändert\n- Agenten bearbeiten: Die Tool-Auswahl ist in „Allgemein“ und „Datenanbindungen“ gegliedert, mit Hinweis, dass ein Agent nur über diese Tools auf Ticketsysteme, ecoDMS, MailStore, Datenbanken, DATEV, Dokumente und Server zugreift.\n- Updates: Stellt ein künftiges Update die Datenbank grundlegend um, hält der Updater die Anwendung vor dem Backup an und stellt bei einem Fehler der Umstellung den Stand des Backups wieder her. Das bereitet das nächste größere Update vor; bei gewöhnlichen Updates ändert sich nichts.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.5.1",
-      "published_at": "2026-09-16T06:20:13Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.5.1",
-          "digest": "sha256:d157f4e29f620b7cb3f823a304dc543c39ca8957450479bf017e7e44d0916e30",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Neu\n- ecoDMS und MailStore: Feld „CA-Zertifikat (PEM)“ je Verbindung. Wer ein selbst signiertes oder firmeninternes Zertifikat einsetzt, trägt es (oder die Firmen-CA) dort ein und lässt „TLS-Zertifikat prüfen“ eingeschaltet, statt die Prüfung abzuschalten.\n\n### Geändert\n- ecoDMS: Formular und Übersicht erklären den verschlüsselten Zugriff (in ecoDMS „TLS (SSL)“ aktivieren, Adresse mit `https://`); die Übersicht zeigt je Verbindung, ob TLS mit Prüfung, TLS ohne Prüfung oder unverschlüsselt verwendet wird.",
       "notes": {
         "expected_downtime_seconds": 60
       }
