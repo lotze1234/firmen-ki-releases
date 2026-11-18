@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-11-11T13:31:04Z",
-  "latest": "1.8.0",
+  "generated_at": "2026-11-18T14:23:25Z",
+  "latest": "1.9.0",
   "releases": [
+    {
+      "version": "1.9.0",
+      "published_at": "2026-11-18T14:23:25Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.9.0",
+          "digest": "sha256:35b407d8811ac9b58cf4074c1e2ca05385080b11f5583137678f5864f1be28b8",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.3",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.3",
+          "digest": "sha256:af1cdd8469e0738891f4af9ffc9762fb106b47470a433539dfc639af1658ebf6"
+        }
+      },
+      "changelog": "### Neu\n- **Mehrere Agenten gleichzeitig**: Bittet der Assistent in einer Nachricht um mehrere Agenten, arbeiten diese gleichzeitig, wenn das KI-Modell dafür Kapazität hat; sonst laufen sie wie bisher nacheinander. Die App entscheidet das selbst. Agenten, die etwas senden oder schreiben, und identische Aufträge laufen immer nacheinander. Meldet das Modell eine Überlastung, wiederholt die App den Auftrag einmal nacheinander und wartet 15 Minuten (bei erneuter Überlastung länger, höchstens 4 Stunden), bevor sie wieder gleichzeitig arbeitet. Bei einem lokalen Modellserver beschleunigt das nur, wenn der Server mehrere Anfragen gleichzeitig bearbeiten kann. Administratoren können je KI-Modell unter *Erweitert* die Zahl **Gleichzeitige Agenten** (1 bis 8) festlegen; leer heißt automatisch. Die FAQ erklärt es.\n\n### Behoben\n- Meldet ein KI-Anbieter mitten in einer laufenden Antwort eine Ratenbegrenzung („zu viele Anfragen“), erkennt die App das jetzt zuverlässig: Im Chat steht der passende Hinweis statt einer allgemeinen Fehlermeldung, und gleichzeitig arbeitende Agenten werden wie vorgesehen einmal nacheinander wiederholt.\n\n### Sicherheit\n- Der Webserver (Puma 8.0.4) und die Bibliothek msgpack (1.8.7) sind auf die fehlerbereinigten Versionen aktualisiert; sie schließen gemeldete Schwachstellen, unter anderem hängende Verbindungen bei sehr langsamen Clients.\n\n### Hinweise zum Update\n- Die Datenbankverbindungen pro Prozess steigen um 2 (`RAILS_MAX_THREADS` + 2); bei einem eigenen Pool in der Konfiguration bitte mindestens 7 einstellen, sonst laufen Agenten weiterhin nacheinander.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.8.0",
       "published_at": "2026-11-11T13:31:04Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Neu\n- ecoDMS und MailStore: Feld „CA-Zertifikat (PEM)“ je Verbindung. Wer ein selbst signiertes oder firmeninternes Zertifikat einsetzt, trägt es (oder die Firmen-CA) dort ein und lässt „TLS-Zertifikat prüfen“ eingeschaltet, statt die Prüfung abzuschalten.\n\n### Geändert\n- ecoDMS: Formular und Übersicht erklären den verschlüsselten Zugriff (in ecoDMS „TLS (SSL)“ aktivieren, Adresse mit `https://`); die Übersicht zeigt je Verbindung, ob TLS mit Prüfung, TLS ohne Prüfung oder unverschlüsselt verwendet wird.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.5.0",
-      "published_at": "2026-09-15T13:22:05Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.5.0",
-          "digest": "sha256:5c4278a89b0a673100613d8640d3d3c092b64042a19574de840c82f9d2c7ca32",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.1",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.1",
-          "digest": "sha256:ee9f33adcbeb254084dfe5b106454fcf8859023d8c28279abc551dfb1e8aa663"
-        }
-      },
-      "changelog": "### Neu\n- **MailStore-Anbindung** (Datenanbindung → MailStore): Firmen-KI liest das E-Mail-Archiv über den in MailStore integrierten IMAP-Server (TLS oder STARTTLS, Rechte des eingetragenen MailStore-Benutzers, nur lesend). Der Assistent kennt die Ordner (`mailstore_folders`), sucht E-Mails nach Suchtext, Betreff, Absender, Empfänger und Zeitraum (`mailstore_search`) und liest einzelne E-Mails mit Text und Anhängen (`mailstore_get`); Anhänge oder die ganze E-Mail als .eml erscheinen auf Wunsch als Download im Chat. Freigabe je Benutzer unter Benutzer → Datenzugriff, Ordnerliste wird stündlich aktualisiert, jeder Zugriff steht im Audit.\n\n### Hinweise zum Update\n- Für MailStore muss in der MailStore Server Service Configuration der IMAP-Server (SSL, Port 993, oder STARTTLS, Port 143) aktiviert sein. Der KI-Benutzer braucht eine MailStore-eigene Anmeldung (bei MFA ein App-Passwort); Anmeldung über Microsoft 365, Google Workspace oder AD FS funktioniert per IMAP nicht.",
       "notes": {
         "expected_downtime_seconds": 60
       }

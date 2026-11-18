@@ -12,6 +12,20 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.0] – 2026-11-18
+
+### Neu
+- **Mehrere Agenten gleichzeitig**: Bittet der Assistent in einer Nachricht um mehrere Agenten, arbeiten diese gleichzeitig, wenn das KI-Modell dafür Kapazität hat; sonst laufen sie wie bisher nacheinander. Die App entscheidet das selbst. Agenten, die etwas senden oder schreiben, und identische Aufträge laufen immer nacheinander. Meldet das Modell eine Überlastung, wiederholt die App den Auftrag einmal nacheinander und wartet 15 Minuten (bei erneuter Überlastung länger, höchstens 4 Stunden), bevor sie wieder gleichzeitig arbeitet. Bei einem lokalen Modellserver beschleunigt das nur, wenn der Server mehrere Anfragen gleichzeitig bearbeiten kann. Administratoren können je KI-Modell unter *Erweitert* die Zahl **Gleichzeitige Agenten** (1 bis 8) festlegen; leer heißt automatisch. Die FAQ erklärt es.
+
+### Behoben
+- Meldet ein KI-Anbieter mitten in einer laufenden Antwort eine Ratenbegrenzung („zu viele Anfragen“), erkennt die App das jetzt zuverlässig: Im Chat steht der passende Hinweis statt einer allgemeinen Fehlermeldung, und gleichzeitig arbeitende Agenten werden wie vorgesehen einmal nacheinander wiederholt.
+
+### Sicherheit
+- Der Webserver (Puma 8.0.4) und die Bibliothek msgpack (1.8.7) sind auf die fehlerbereinigten Versionen aktualisiert; sie schließen gemeldete Schwachstellen, unter anderem hängende Verbindungen bei sehr langsamen Clients.
+
+### Hinweise zum Update
+- Die Datenbankverbindungen pro Prozess steigen um 2 (`RAILS_MAX_THREADS` + 2); bei einem eigenen Pool in der Konfiguration bitte mindestens 7 einstellen, sonst laufen Agenten weiterhin nacheinander.
+
 ## [1.8.0] – 2026-11-11
 
 Dieses Release fasst die Vorabversionen 1.8.0-beta.1 bis 1.8.0-beta.4 zusammen.
