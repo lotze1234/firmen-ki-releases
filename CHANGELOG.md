@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.1] – 2026-11-18
+
+### Neu
+- **Ladeanzeige für das KI-Modell**: Muss ein eigener Modellserver das KI-Modell für eine Anfrage erst in den Speicher laden, zeigt der Chat jetzt **Das KI-Modell wird gerade geladen …** mit einem laufenden Balken und der bisherigen Wartezeit, statt nur „arbeitet …“. Die App erkennt das bei LM Studio und Ollama. Bei anderen eigenen Servern erscheint nach etwa 10 Sekunden ohne Antwort der neutrale Hinweis **KI-Modell braucht länger …**. Einen Prozentwert gibt es nicht, weil die Modellserver keinen Fortschritt melden. Die FAQ erklärt es.
+
 ## [1.9.0] – 2026-11-18
 
 ### Neu
