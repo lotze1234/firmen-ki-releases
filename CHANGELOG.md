@@ -12,6 +12,29 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.2] – 2026-11-19
+
+### Neu
+- **Zwei neue Videoanleitungen zu den Glossaren**: „Übersetzung gegen das Glossar eines Kunden prüfen“ (im Abschnitt Agenten der Hilfe, auch über den Hilfe-Knopf im Chat; zeigt auch, wie dieselbe Prüfung auf einem anderen KI-Modell läuft) und „Glossare je Kunde einrichten“ (nur für Administratoren, im Abschnitt Daten der Hilfe und über den Hilfe-Knopf bei den Dokumenten). Beide mit Beispieldaten in Deutsch, Englisch und Französisch.
+- **Originaldateien aus der Dokumentbibliothek**: Der Assistent und Agenten mit Zugriff auf die Dokumentbibliothek können jetzt die Originaldatei eines Dokuments (zum Beispiel eine Excel-Tabelle) in das Arbeitsverzeichnis der Unterhaltung holen und dort auswerten (Werkzeug `fetch_document`). Das geht nur für Dokumentquellen, die dem Benutzer freigegeben sind, nur lesend und bis 25 MB. Die Datei wird dem Nutzer nicht als Download angeboten. Passen mehrere Dateien zur Anfrage, fragt der Assistent nach, statt zu raten. Weil der Inhalt aus Dokumenten stammt, fragt der Assistent danach bei Schritten mit Außenwirkung (zum Beispiel E-Mail senden) nach. Agenten ohne eigene Werkzeugauswahl erhalten das Werkzeug automatisch; bei Agenten mit eigener Auswahl ergänzen Administratoren es im Agenten-Formular. Suchbegriffe müssen als ganze Wörter im Dateipfad stehen, mit `*` am Ende genügt der Wortanfang (z. B. `gloss*`).
+
+### Geändert
+- **Modellauswahl im Chat gilt auch für beauftragte Agenten**: Wählen Sie im Chat ausdrücklich ein KI-Modell, nutzen auch die Agenten, die der Assistent in dieser Unterhaltung beauftragt, dieses Modell. Bei „Standard“ bleibt es beim Modell des Agenten (sonst dem Standard-Modell); Workflows ändern sich nicht. Das gilt auch für geplante Aufgaben mit eigener Modellwahl, die Agenten beauftragen. Die gleichzeitige Ausführung mehrerer Agenten zählt die Auslastung jetzt für das tatsächlich genutzte Modell.
+- **Standard-Agent „document-sorter“ reagiert genauer**: Englische Sätze wie „check the translation file against the glossary document“ lösen das Sortieren von Dokumenten nicht mehr aus; „file the documents“ funktioniert weiterhin.
+- **Benutzer bearbeiten, Datenzugriff bei Administratoren**: Administratoren haben immer Zugriff auf das Kunden-Wiki, das Benutzerverzeichnis und alle angebundenen Datenquellen. Das Formular zeigt bei ihnen deshalb keine (bisher leeren und gesperrten) Kästchen mehr, sondern nur noch diesen Hinweis – auch auf einer Installation ohne angebundene Datenquellen. Stellen Sie die Rolle im Formular um, wechselt die Anzeige sofort. Machen Sie einen Benutzer zum Administrator, verfallen seine einzelnen Freigaben beim Speichern; nach einer späteren Rückstufung vergeben Sie sie neu.
+
+### Behoben
+- **Betrieb hinter einem Reverse-Proxy mit eigenem Port**: Liegt Firmen-KI außen auf einem eigenen Port (zum Beispiel `https://ki.firma.de:8443`) und reicht der vorgelagerte Proxy den Hostnamen ohne diesen Port weiter, verloren Weiterleitungen bisher den Port und die Live-Anzeige im Chat blieb stehen („Request origin not allowed“ im Protokoll). Firmen-KI ergänzt den Port jetzt selbst, sobald `APP_HOST` die öffentliche Adresse mit Port nennt, und lässt diese Adresse für die Live-Verbindung zu. Die Installationsanleitung hat dazu den neuen Abschnitt „Betrieb hinter einem Reverse-Proxy“, die FAQ einen Eintrag unter „Probleme lösen“.
+- **Eigene Anpassungen in `compose.override.yml` wurden nie geladen**: Der Installer trug die Datei nicht in `COMPOSE_FILE` ein. Neue Installationen laden sie jetzt.
+- **Installer ohne Rückfragen** (`--non-interactive`): brach ab, wenn kein API-Token für den KI-Server gesetzt war, obwohl der Token freiwillig ist. `EMBEDDING_MODEL_ID=` (ausdrücklich leer) schaltet jetzt wie beschrieben die Embeddings ab.
+- Links in Benachrichtigungen (geplante Aufgaben) begannen mit `http://`, wenn `ASSUME_SSL` oder `FORCE_SSL` als `1`, `yes` oder `on` statt `true` gesetzt war.
+
+### Neue Skills
+- **glossary-check** und Agent **glossary-checker**: Prüft übersetzte Tabellen Zeile für Zeile gegen das verbindliche Glossar eines Kunden (Glossar-Datei in einer Dokumentquelle oder mit hochgeladen) und liefert das Ergebnis als Excel. Das Ergebnis stammt aus einem festen Abgleich und ist bei jedem Lauf gleich. Beispiel: „Prüfe diese Übersetzung gegen das Glossar von Kunde Muster“.
+
+### Hinweise zum Update
+- **Bestehende Installationen mit eigenen Einträgen in `compose.override.yml`**: Die Datei wird erst geladen, nachdem `sudo /opt/firmen-ki/bin/install.sh` einmal erneut ausgeführt wurde (ergänzt `COMPOSE_FILE` in `.env`, alles andere bleibt) und die Dienste mit `bin/firmenki up` neu gestartet sind. Prüfen Sie vorher, ob in der Datei nur steht, was wirklich gelten soll – bisher blieb ihr Inhalt wirkungslos. Der Installer zeigt die Einträge an und fragt nach, bevor er die Dienste damit startet.
+
 ## [1.9.1] – 2026-11-18
 
 ### Neu

@@ -33,10 +33,14 @@ done
 say()  { printf '\n\033[1m%s\033[0m\n' "$*"; }
 info() { printf '  %s\n' "$*"; }
 fail() { printf '\nFehler: %s\n' "$*" >&2; exit 1; }
-ask()  { # ask VAR "Frage" "Default" [secret]
-  local var="$1" q="$2" def="${3:-}" secret="${4:-}" val
+ask()  { # ask VAR "Frage" "Default" [secret] [optional] – optional: darf leer bleiben (auch mit --non-interactive)
+  local var="$1" q="$2" def="${3:-}" secret="${4:-}" optional="${5:-}" val
   if [ -n "${!var:-}" ]; then return; fi
-  [ "$INTERACTIVE" = 1 ] || { [ -n "$def" ] && { printf -v "$var" '%s' "$def"; return; } || fail "$var fehlt (ENV setzen oder ohne --non-interactive ausführen)"; }
+  if [ -n "$optional" ] && [ -n "${!var+x}" ]; then return; fi   # ausdrücklich leer gesetzt (z. B. EMBEDDING_MODEL_ID=)
+  if [ "$INTERACTIVE" != 1 ]; then
+    if [ -n "$def" ] || [ -n "$optional" ]; then printf -v "$var" '%s' "$def"; return; fi
+    fail "$var fehlt (ENV setzen oder ohne --non-interactive ausführen)"
+  fi
   if [ -n "$secret" ]; then read -r -s -p "  $q: " val; echo; else read -r -p "  $q${def:+ [$def]}: " val; fi
   printf -v "$var" '%s' "${val:-$def}"
 }
@@ -68,6 +72,26 @@ if [ -f .env ]; then
     v="$(envval .env "$k")"; [ -n "$v" ] && printf -v "$k" '%s' "$v"
   done
   CHANNEL="$(envval .env UPDATE_CHANNEL)"; CHANNEL="${CHANNEL:-stable}"
+  # Ältere Installationen: compose.override.yml stand nicht in COMPOSE_FILE und wurde deshalb nie geladen.
+  case ":${COMPOSE_FILE:-}:" in
+    *:compose.override.yml:*) ;;
+    *) if [ -n "${COMPOSE_FILE:-}" ]; then
+         case "$COMPOSE_FILE" in *[!A-Za-z0-9._:/-]*) fail "COMPOSE_FILE in .env enthält unerwartete Zeichen – bitte von Hand um :compose.override.yml ergänzen" ;; esac
+         sed -i.bak "s|^COMPOSE_FILE=.*|COMPOSE_FILE=$COMPOSE_FILE:compose.override.yml|" .env || fail "COMPOSE_FILE in .env ließ sich nicht ergänzen"
+         rm -f .env.bak
+         COMPOSE_FILE="$COMPOSE_FILE:compose.override.yml"
+         info "COMPOSE_FILE um compose.override.yml ergänzt (eigene Anpassungen werden jetzt geladen)"
+         # Die Datei blieb bisher wirkungslos – zeigen, was ab jetzt gilt (z. B. ein vergessenes CSP_REPORT_ONLY).
+         if [ -f compose.override.yml ] && grep -vE '^[[:space:]]*(#|$)|^services:[[:space:]]*\{\}[[:space:]]*$' compose.override.yml >/dev/null; then
+           info "ACHTUNG: compose.override.yml enthält eigene Einträge. Sie gelten, sobald dieser Installer die Dienste am Ende startet:"
+           grep -vE '^[[:space:]]*(#|$)' compose.override.yml | sed 's/^/      /'
+           if [ "$INTERACTIVE" = 1 ]; then
+             read -r -p "  Mit diesen Einträgen fortfahren? [j/N]: " go || go=""
+             case "${go:-}" in j|J|y|Y) ;; *) fail "Abgebrochen. compose.override.yml anpassen und install.sh erneut ausführen (COMPOSE_FILE ist bereits ergänzt)." ;; esac
+           fi
+         fi
+       fi ;;
+  esac
 else
   say "Konfiguration"
   ask REGISTRY "Container-Registry" "ghcr.io"
@@ -76,14 +100,14 @@ else
   ask REGISTRY_TOKEN "Registry-Token (Leserecht)" "" secret
   ask UPDATE_URL "Update-Server (Basis-URL der Manifeste)" "$DEFAULT_UPDATE_URL"
   ask LLM_BASE_URL "KI-Server (OpenAI-kompatibel, z. B. http://192.168.1.50:1234/v1; auf diesem Host: http://host.docker.internal:1234/v1)" "http://host.docker.internal:1234/v1"
-  ask LLM_API_KEY "API-Token des KI-Servers (leer, wenn keiner)" ""
+  ask LLM_API_KEY "API-Token des KI-Servers (leer, wenn keiner)" "" "" optional
   ask LLM_MODEL_ID "Modell-ID (laut GET /v1/models)" "openai/gpt-oss-120b"
-  ask EMBEDDING_MODEL_ID "Embedding-Modell (leer = nur Volltextsuche)" "text-embedding-nomic-embed-text-v1.5"
+  ask EMBEDDING_MODEL_ID "Embedding-Modell (leer = nur Volltextsuche)" "text-embedding-nomic-embed-text-v1.5" "" optional
   ask APP_HOST "Hostname/IP, unter dem Firmen-KI erreichbar ist" "$(hostname -f 2>/dev/null || hostname)"
   ask TLS_MODE "Zugriff: http (Port im LAN) | cert (HTTPS, eigenes Zertifikat) | internal (HTTPS, interne CA)" "http"
   case "$TLS_MODE" in
-    http)     ask HTTP_PORT "HTTP-Port" "80"; COMPOSE_FILE="compose.yml:compose.direct.yml"; ASSUME_SSL=false; FORCE_SSL=false ;;
-    cert|internal) COMPOSE_FILE="compose.yml:compose.tls.yml"; HTTP_PORT=80; ASSUME_SSL=true; FORCE_SSL=true ;;
+    http)     ask HTTP_PORT "HTTP-Port" "80"; COMPOSE_FILE="compose.yml:compose.direct.yml:compose.override.yml"; ASSUME_SSL=false; FORCE_SSL=false ;;
+    cert|internal) COMPOSE_FILE="compose.yml:compose.tls.yml:compose.override.yml"; HTTP_PORT=80; ASSUME_SSL=true; FORCE_SSL=true ;;
     *) fail "TLS_MODE muss http, cert oder internal sein" ;;
   esac
   [ -n "$REGISTRY_USER" ] && [ -n "$REGISTRY_TOKEN" ] || fail "Registry-Zugang fehlt"

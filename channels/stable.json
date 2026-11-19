@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-11-18T14:52:59Z",
-  "latest": "1.9.1",
+  "generated_at": "2026-11-19T10:02:06Z",
+  "latest": "1.9.2",
   "releases": [
+    {
+      "version": "1.9.2",
+      "published_at": "2026-11-19T10:02:06Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.9.2",
+          "digest": "sha256:ea8955931207a07b89b9788a7615e4fff4700c55b62f3c5e98fad28715f08999",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.3",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.3",
+          "digest": "sha256:af1cdd8469e0738891f4af9ffc9762fb106b47470a433539dfc639af1658ebf6"
+        }
+      },
+      "changelog": "### Neu\n- **Zwei neue Videoanleitungen zu den Glossaren**: „Übersetzung gegen das Glossar eines Kunden prüfen“ (im Abschnitt Agenten der Hilfe, auch über den Hilfe-Knopf im Chat; zeigt auch, wie dieselbe Prüfung auf einem anderen KI-Modell läuft) und „Glossare je Kunde einrichten“ (nur für Administratoren, im Abschnitt Daten der Hilfe und über den Hilfe-Knopf bei den Dokumenten). Beide mit Beispieldaten in Deutsch, Englisch und Französisch.\n- **Originaldateien aus der Dokumentbibliothek**: Der Assistent und Agenten mit Zugriff auf die Dokumentbibliothek können jetzt die Originaldatei eines Dokuments (zum Beispiel eine Excel-Tabelle) in das Arbeitsverzeichnis der Unterhaltung holen und dort auswerten (Werkzeug `fetch_document`). Das geht nur für Dokumentquellen, die dem Benutzer freigegeben sind, nur lesend und bis 25 MB. Die Datei wird dem Nutzer nicht als Download angeboten. Passen mehrere Dateien zur Anfrage, fragt der Assistent nach, statt zu raten. Weil der Inhalt aus Dokumenten stammt, fragt der Assistent danach bei Schritten mit Außenwirkung (zum Beispiel E-Mail senden) nach. Agenten ohne eigene Werkzeugauswahl erhalten das Werkzeug automatisch; bei Agenten mit eigener Auswahl ergänzen Administratoren es im Agenten-Formular. Suchbegriffe müssen als ganze Wörter im Dateipfad stehen, mit `*` am Ende genügt der Wortanfang (z. B. `gloss*`).\n\n### Geändert\n- **Modellauswahl im Chat gilt auch für beauftragte Agenten**: Wählen Sie im Chat ausdrücklich ein KI-Modell, nutzen auch die Agenten, die der Assistent in dieser Unterhaltung beauftragt, dieses Modell. Bei „Standard“ bleibt es beim Modell des Agenten (sonst dem Standard-Modell); Workflows ändern sich nicht. Das gilt auch für geplante Aufgaben mit eigener Modellwahl, die Agenten beauftragen. Die gleichzeitige Ausführung mehrerer Agenten zählt die Auslastung jetzt für das tatsächlich genutzte Modell.\n- **Standard-Agent „document-sorter“ reagiert genauer**: Englische Sätze wie „check the translation file against the glossary document“ lösen das Sortieren von Dokumenten nicht mehr aus; „file the documents“ funktioniert weiterhin.\n- **Benutzer bearbeiten, Datenzugriff bei Administratoren**: Administratoren haben immer Zugriff auf das Kunden-Wiki, das Benutzerverzeichnis und alle angebundenen Datenquellen. Das Formular zeigt bei ihnen deshalb keine (bisher leeren und gesperrten) Kästchen mehr, sondern nur noch diesen Hinweis – auch auf einer Installation ohne angebundene Datenquellen. Stellen Sie die Rolle im Formular um, wechselt die Anzeige sofort. Machen Sie einen Benutzer zum Administrator, verfallen seine einzelnen Freigaben beim Speichern; nach einer späteren Rückstufung vergeben Sie sie neu.\n\n### Behoben\n- **Betrieb hinter einem Reverse-Proxy mit eigenem Port**: Liegt Firmen-KI außen auf einem eigenen Port (zum Beispiel `https://ki.firma.de:8443`) und reicht der vorgelagerte Proxy den Hostnamen ohne diesen Port weiter, verloren Weiterleitungen bisher den Port und die Live-Anzeige im Chat blieb stehen („Request origin not allowed“ im Protokoll). Firmen-KI ergänzt den Port jetzt selbst, sobald `APP_HOST` die öffentliche Adresse mit Port nennt, und lässt diese Adresse für die Live-Verbindung zu. Die Installationsanleitung hat dazu den neuen Abschnitt „Betrieb hinter einem Reverse-Proxy“, die FAQ einen Eintrag unter „Probleme lösen“.\n- **Eigene Anpassungen in `compose.override.yml` wurden nie geladen**: Der Installer trug die Datei nicht in `COMPOSE_FILE` ein. Neue Installationen laden sie jetzt.\n- **Installer ohne Rückfragen** (`--non-interactive`): brach ab, wenn kein API-Token für den KI-Server gesetzt war, obwohl der Token freiwillig ist. `EMBEDDING_MODEL_ID=` (ausdrücklich leer) schaltet jetzt wie beschrieben die Embeddings ab.\n- Links in Benachrichtigungen (geplante Aufgaben) begannen mit `http://`, wenn `ASSUME_SSL` oder `FORCE_SSL` als `1`, `yes` oder `on` statt `true` gesetzt war.\n\n### Neue Skills\n- **glossary-check** und Agent **glossary-checker**: Prüft übersetzte Tabellen Zeile für Zeile gegen das verbindliche Glossar eines Kunden (Glossar-Datei in einer Dokumentquelle oder mit hochgeladen) und liefert das Ergebnis als Excel. Das Ergebnis stammt aus einem festen Abgleich und ist bei jedem Lauf gleich. Beispiel: „Prüfe diese Übersetzung gegen das Glossar von Kunde Muster“.\n\n### Hinweise zum Update\n- **Bestehende Installationen mit eigenen Einträgen in `compose.override.yml`**: Die Datei wird erst geladen, nachdem `sudo /opt/firmen-ki/bin/install.sh` einmal erneut ausgeführt wurde (ergänzt `COMPOSE_FILE` in `.env`, alles andere bleibt) und die Dienste mit `bin/firmenki up` neu gestartet sind. Prüfen Sie vorher, ob in der Datei nur steht, was wirklich gelten soll – bisher blieb ihr Inhalt wirkungslos. Der Installer zeigt die Einträge an und fragt nach, bevor er die Dienste damit startet.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.9.1",
       "published_at": "2026-11-18T14:52:59Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Neu\n- **Ticketsysteme – ganze Schnittstelle nutzbar**: Der Assistent erreicht jetzt alle Endpunkte, die die Schnittstelle des angebundenen Ticketsystems (z. B. DocBee) anbietet, nicht nur Tickets und Kommentare. Er kann damit zum Beispiel den Bearbeiter eines Tickets ändern, Leistungen anlegen oder Planungszeiten eintragen. Neue Tools: `ticket_api_describe` (Endpunkte und Felder nachschlagen), `ticket_api_get` (lesen), `ticket_api_write` (anlegen und ändern, nur mit „Schreiben erlauben“) und `ticket_api_delete` (löschen).\n- **Ticketsysteme – Schalter „Löschen erlauben“**: Löschen ist ein eigener Schalter je Ticketsystem, standardmäßig aus, und wirkt nur zusammen mit „Schreiben erlauben“. Der Assistent löscht nur auf ausdrücklichen Wunsch und immer nur einen Datensatz. Jeder Aufruf steht im Audit.\n\n### Hinweise zum Update\n- Ticketsysteme: Nach dem Update kann der Assistent über die Schnittstelle alles lesen, was der angebundene Benutzer im Ticketsystem sehen darf, und bei gesetztem „Schreiben erlauben“ auch alles ändern, was dieser Benutzer ändern darf. Bitte die Rechte dieses Benutzers im Ticketsystem prüfen und knapp halten. Bestehende Agenten bekommen die neuen Tools erst, wenn ein Administrator sie unter Agenten → Bearbeiten anhakt.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.5.3",
-      "published_at": "2026-09-21T12:50:35Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.5.3",
-          "digest": "sha256:511f9cdcd2526399b998ef0eacbd0d84390e59d740a88170449f3fe646cd768a",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.2",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
-          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
-        }
-      },
-      "changelog": "### Behoben\n- Agenten und Datenanbindungen: Ein vom Assistenten angelegter Agent meldete, der Zugriff auf das Ticketsystem (z. B. DocBee) sei „in der Laufumgebung nicht angekommen“. Ursache: Der Agent hatte die Ticket-Tools nicht erhalten, bekam das Ticketsystem aber trotzdem beschrieben. Jetzt gibt der Assistent beim Anlegen die passenden Tools mit und nennt, welche Datenanbindungen der Agent erreicht; ein Agent bekommt nur noch die Anbindungen beschrieben, für die er Tools hat, und sagt sonst klar, welches Tool fehlt. Bestehende Agenten: unter **Agenten → Bearbeiten** die Tools der gewünschten Datenanbindung anhaken. (Version 1.5.2 mit derselben Korrektur wurde nicht veröffentlicht.)\n\n### Geändert\n- Agenten bearbeiten: Die Tool-Auswahl ist in „Allgemein“ und „Datenanbindungen“ gegliedert, mit Hinweis, dass ein Agent nur über diese Tools auf Ticketsysteme, ecoDMS, MailStore, Datenbanken, DATEV, Dokumente und Server zugreift.\n- Updates: Stellt ein künftiges Update die Datenbank grundlegend um, hält der Updater die Anwendung vor dem Backup an und stellt bei einem Fehler der Umstellung den Stand des Backups wieder her. Das bereitet das nächste größere Update vor; bei gewöhnlichen Updates ändert sich nichts.",
       "notes": {
         "expected_downtime_seconds": 60
       }
