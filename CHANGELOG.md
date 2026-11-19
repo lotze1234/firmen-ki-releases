@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.3] – 2026-11-19
+
+### Geändert
+- **Glossar-Prüfung: Zuordnung über das Kunden-Wiki**: Tragen Sie beim Kunden im Kunden-Wiki einen Fakt **Glossar** mit dem Dateinamen seines Glossars ein (zum Beispiel „Glossar Muster AG.xlsx“). Der Agent glossary-checker schaut bei einer Prüfung zuerst dort nach und holt genau diese Datei aus der Dokumentbibliothek; ist sie nicht auffindbar, meldet er das und weicht nicht auf ein anderes Glossar aus. Ohne Eintrag im Wiki gilt wie bisher die Suche über den Dateinamen. Benutzer brauchen dafür den Zugriff auf das Kunden-Wiki. Die FAQ erklärt es.
+
 ## [1.9.2] – 2026-11-19
 
 ### Neu
