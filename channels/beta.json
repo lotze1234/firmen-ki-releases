@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "beta",
-  "generated_at": "2026-11-19T16:18:22Z",
-  "latest": "1.9.3",
+  "generated_at": "2026-11-24T12:38:46Z",
+  "latest": "1.9.4",
   "releases": [
+    {
+      "version": "1.9.4",
+      "published_at": "2026-11-24T12:38:46Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.9.4",
+          "digest": "sha256:f975175079910165939b1808728a5fd8e077aa1bccd22b9a9f541ed53f35fc2e",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.3",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.3",
+          "digest": "sha256:af1cdd8469e0738891f4af9ffc9762fb106b47470a433539dfc639af1658ebf6"
+        }
+      },
+      "changelog": "### Neu\n- **Dokumente im Layout einer Vorlage**: Hängen Sie einen Rohtext (Word) und eine Layout-Vorlage (PDF) an oder nennen Sie den Kunden, dessen Layout im Kunden-Wiki hinterlegt ist (Fakt **Layout**). Der neue Agent **layout-formatter** liefert das fertige Dokument als Word und als PDF mit Deckblatt, Inhaltsverzeichnis samt Seitenzahlen, Überschriften, Definitionen, Aufzählungen, Tabellen und Fußzeile. Das Layout setzt ein festes Programm um, nicht das KI-Modell: gleiche Dateien ergeben immer dasselbe Ergebnis, der Text wird nicht verändert, und was das Programm nicht sicher erkennt oder nicht abbilden kann, wird gemeldet statt still geändert. „Richte das Layout für Kunde X ein“ erzeugt aus einer PDF-Vorlage ein geprüftes Layout-Profil mit Vorschau. Die FAQ erklärt es.\n- **Dateien direkt in die Dokumentbibliothek hochladen**: Neben Ordnern, Netzlaufwerken und SharePoint gibt es die Quellenart **Hochgeladene Dateien**. Administratoren und Technik-Administratoren laden dort über **Dateien hochladen** mehrere Dateien auf einmal hoch, wahlweise in einen Unterordner; erlaubt sind die Dateitypen der Quelle bis 100 MB je Datei. Die Dateien werden sofort indexiert. Wird eine Datei mit gleichem Namen im selben Ordner erneut hochgeladen, ersetzt sie die bisherige; die alte Fassung bleibt als Version herunterladbar, durchsucht wird nur die aktuelle. Ein Scan entfernt hochgeladene Dateien nie, gelöscht wird nur ausdrücklich. Die FAQ erklärt es.\n- **Unterlagen im Kunden-Wiki**: Beim Kunden im Kunden-Wiki teilen Sie im neuen Abschnitt **Unterlagen** einzelne Dokumente, Ordner oder ganze Quellen der Dokumentbibliothek zu, jeweils mit einer kurzen Beschreibung für die KI (zum Beispiel „Glossar“ oder „Layout“), oder laden Dateien direkt beim Kunden hoch. Sie landen in der gemeinsamen Quelle „Kundenunterlagen“ mit einem Ordner je Kunde; ein vertraulicher Kunde erhält eine eigene Quelle ohne Freigaben. Die Quelle legt ein Administrator beim ersten Hochladen an, andere Benutzer brauchen ihre Freigabe unter **Benutzer → Datenzugriff**. Zugeteilte Unterlagen sieht nur, wer den Kunden im Wiki sieht und die Quelle nutzen darf. Die FAQ erklärt es.\n- **Die KI kennt die Unterlagen eines Kunden**: Nennt eine Nachricht einen Kunden aus dem Kunden-Wiki als ganzes Wort, erhält der Assistent (auch beauftragte Agenten) die zugeteilten Unterlagen dieses Kunden mit ihren Beschreibungen (höchstens 3 Kunden und 10 Einträge je Kunde) und holt eine Datei damit gezielt aus der Bibliothek. Suche und Lesen im Kunden-Wiki liefern die Unterlagen ebenfalls mit. Weil die Beschreibungen von Benutzern stammen, fragt der Assistent in solchen Unterhaltungen vor Schritten mit Wirkung (zum Beispiel E-Mail senden, ins Wiki schreiben) nach Bestätigung.\n\n### Geändert\n- **Glossar-Prüfung und Layout nutzen zuerst die Unterlagen des Kunden**: Die Agenten **glossary-checker** und **layout-formatter** nehmen zuerst die Unterlage, die dem Kunden im Kunden-Wiki mit der Beschreibung „Glossar“ bzw. „Layout“ zugeteilt ist. Ein Fakt **Glossar** bzw. **Layout** beim Kunden funktioniert weiter, wenn keine passende Zuteilung besteht; ohne beides gilt beim Glossar wie bisher die Suche über den Dateinamen. Die Antwort nennt, woher die Zuordnung stammt. Die FAQ zu Glossaren und Layout ist entsprechend überarbeitet.\n\n### Neue Skills\n- **document-layout** und Agent **layout-formatter** (Layout einer Vorlage auf einen Rohtext anwenden, Ergebnis als Word und PDF).\n\n### Sicherheit\n- Ruby 3.4.13 statt 3.4.9 (schließt eine kritische Lücke in Ruby, CVE-2026-132825).\n- Die automatische Zuordnung von Anfragen zu Agenten bricht die Prüfung eines Auslösemusters nach kurzer Zeit ab; ein ungünstiges Muster in einem eigenen Agenten kann die Antworten damit nicht mehr verzögern.\n\n### Hinweise zum Update\n- **Ordner `storage` sichern**: Hochgeladene Dateien (Dokumentbibliothek, Kunden-Wiki und ihre Versionen) liegen im Ordner `storage` der Installation, nicht in der Datenbank. `bin/firmenki backup` sichert sie nicht mit; nehmen Sie `storage` (wie schon `workspaces`) in Ihre Dateisicherung auf.\n- **Angepasste Agenten glossary-checker und layout-formatter**: Hat Ihre Firma einen dieser Agenten angepasst, überschreibt das Update die Firmen-Kopie nicht; sie nutzt die zugeteilten Unterlagen dann nicht. Übernehmen Sie die neuen Schritte bei Bedarf selbst oder setzen Sie den Agenten unter **Agenten verwalten** auf den Standard zurück.\n- Das Update ergänzt die Datenbank nur um neue Tabellen (Zuteilungen und Versionen) und zwei neue Spalten; bestehende Daten bleiben unverändert.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.9.3",
       "published_at": "2026-11-19T16:18:22Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Geändert\n- Automatische Dokumentscans starten nur noch in einem Zeitfenster, standardmäßig nachts von 1 bis 6 Uhr\n  (*Einstellungen → Dokumentsuche*). Scans fordern viele Embeddings an; lief das Embedding-Modell auf demselben\n  KI-Server wie das Chat-Modell, konnten sie laufende Unterhaltungen abbrechen („Model is unloaded“).\n  „Jetzt scannen“ funktioniert weiterhin jederzeit.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.7.3",
-      "published_at": "2026-10-15T11:24:45Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.7.3",
-          "digest": "sha256:9ab6486c008c8af137df3b66c85d7801b4b6a259ae8dc1ec3417a661af5be62a",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.2",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
-          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
-        }
-      },
-      "changelog": "### Behoben\n- Antworten brachen mit „undefined method 'delete_prefix' for nil“ ab, wenn der KI-Server mitten im Stream einen\n  Fehler meldete und dessen Details in einem eigenen Netzwerk-Paket ankamen (häufig nach langen Agenten-Läufen).\n  Jetzt erscheint die eigentliche Meldung des Servers („Der KI-Server hat die Antwort mit einem Fehler\n  abgebrochen: …“), damit klar ist, was schiefging.",
       "notes": {
         "expected_downtime_seconds": 60
       }

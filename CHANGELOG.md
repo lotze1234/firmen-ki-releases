@@ -12,6 +12,29 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.4] – 2026-11-24
+
+### Neu
+- **Dokumente im Layout einer Vorlage**: Hängen Sie einen Rohtext (Word) und eine Layout-Vorlage (PDF) an oder nennen Sie den Kunden, dessen Layout im Kunden-Wiki hinterlegt ist (Fakt **Layout**). Der neue Agent **layout-formatter** liefert das fertige Dokument als Word und als PDF mit Deckblatt, Inhaltsverzeichnis samt Seitenzahlen, Überschriften, Definitionen, Aufzählungen, Tabellen und Fußzeile. Das Layout setzt ein festes Programm um, nicht das KI-Modell: gleiche Dateien ergeben immer dasselbe Ergebnis, der Text wird nicht verändert, und was das Programm nicht sicher erkennt oder nicht abbilden kann, wird gemeldet statt still geändert. „Richte das Layout für Kunde X ein“ erzeugt aus einer PDF-Vorlage ein geprüftes Layout-Profil mit Vorschau. Die FAQ erklärt es.
+- **Dateien direkt in die Dokumentbibliothek hochladen**: Neben Ordnern, Netzlaufwerken und SharePoint gibt es die Quellenart **Hochgeladene Dateien**. Administratoren und Technik-Administratoren laden dort über **Dateien hochladen** mehrere Dateien auf einmal hoch, wahlweise in einen Unterordner; erlaubt sind die Dateitypen der Quelle bis 100 MB je Datei. Die Dateien werden sofort indexiert. Wird eine Datei mit gleichem Namen im selben Ordner erneut hochgeladen, ersetzt sie die bisherige; die alte Fassung bleibt als Version herunterladbar, durchsucht wird nur die aktuelle. Ein Scan entfernt hochgeladene Dateien nie, gelöscht wird nur ausdrücklich. Die FAQ erklärt es.
+- **Unterlagen im Kunden-Wiki**: Beim Kunden im Kunden-Wiki teilen Sie im neuen Abschnitt **Unterlagen** einzelne Dokumente, Ordner oder ganze Quellen der Dokumentbibliothek zu, jeweils mit einer kurzen Beschreibung für die KI (zum Beispiel „Glossar“ oder „Layout“), oder laden Dateien direkt beim Kunden hoch. Sie landen in der gemeinsamen Quelle „Kundenunterlagen“ mit einem Ordner je Kunde; ein vertraulicher Kunde erhält eine eigene Quelle ohne Freigaben. Die Quelle legt ein Administrator beim ersten Hochladen an, andere Benutzer brauchen ihre Freigabe unter **Benutzer → Datenzugriff**. Zugeteilte Unterlagen sieht nur, wer den Kunden im Wiki sieht und die Quelle nutzen darf. Die FAQ erklärt es.
+- **Die KI kennt die Unterlagen eines Kunden**: Nennt eine Nachricht einen Kunden aus dem Kunden-Wiki als ganzes Wort, erhält der Assistent (auch beauftragte Agenten) die zugeteilten Unterlagen dieses Kunden mit ihren Beschreibungen (höchstens 3 Kunden und 10 Einträge je Kunde) und holt eine Datei damit gezielt aus der Bibliothek. Suche und Lesen im Kunden-Wiki liefern die Unterlagen ebenfalls mit. Weil die Beschreibungen von Benutzern stammen, fragt der Assistent in solchen Unterhaltungen vor Schritten mit Wirkung (zum Beispiel E-Mail senden, ins Wiki schreiben) nach Bestätigung.
+
+### Geändert
+- **Glossar-Prüfung und Layout nutzen zuerst die Unterlagen des Kunden**: Die Agenten **glossary-checker** und **layout-formatter** nehmen zuerst die Unterlage, die dem Kunden im Kunden-Wiki mit der Beschreibung „Glossar“ bzw. „Layout“ zugeteilt ist. Ein Fakt **Glossar** bzw. **Layout** beim Kunden funktioniert weiter, wenn keine passende Zuteilung besteht; ohne beides gilt beim Glossar wie bisher die Suche über den Dateinamen. Die Antwort nennt, woher die Zuordnung stammt. Die FAQ zu Glossaren und Layout ist entsprechend überarbeitet.
+
+### Neue Skills
+- **document-layout** und Agent **layout-formatter** (Layout einer Vorlage auf einen Rohtext anwenden, Ergebnis als Word und PDF).
+
+### Sicherheit
+- Ruby 3.4.13 statt 3.4.9 (schließt eine kritische Lücke in Ruby, CVE-2026-132825).
+- Die automatische Zuordnung von Anfragen zu Agenten bricht die Prüfung eines Auslösemusters nach kurzer Zeit ab; ein ungünstiges Muster in einem eigenen Agenten kann die Antworten damit nicht mehr verzögern.
+
+### Hinweise zum Update
+- **Ordner `storage` sichern**: Hochgeladene Dateien (Dokumentbibliothek, Kunden-Wiki und ihre Versionen) liegen im Ordner `storage` der Installation, nicht in der Datenbank. `bin/firmenki backup` sichert sie nicht mit; nehmen Sie `storage` (wie schon `workspaces`) in Ihre Dateisicherung auf.
+- **Angepasste Agenten glossary-checker und layout-formatter**: Hat Ihre Firma einen dieser Agenten angepasst, überschreibt das Update die Firmen-Kopie nicht; sie nutzt die zugeteilten Unterlagen dann nicht. Übernehmen Sie die neuen Schritte bei Bedarf selbst oder setzen Sie den Agenten unter **Agenten verwalten** auf den Standard zurück.
+- Das Update ergänzt die Datenbank nur um neue Tabellen (Zuteilungen und Versionen) und zwei neue Spalten; bestehende Daten bleiben unverändert.
+
 ## [1.9.3] – 2026-11-19
 
 ### Geändert
