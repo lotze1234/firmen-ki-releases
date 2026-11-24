@@ -12,6 +12,11 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.5] – 2026-11-24
+
+### Geändert
+- **Videoanleitung „Glossare je Kunde einrichten“** zeigt den neuen Weg: das Glossar beim Kunden im Kunden-Wiki unter **Unterlagen** hochladen und mit der Beschreibung „Glossar“ zuteilen, danach den Datenzugriff auf das Kunden-Wiki und die Quelle „Kundenunterlagen“ freigeben.
+
 ## [1.9.4] – 2026-11-24
 
 ### Neu
