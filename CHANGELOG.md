@@ -12,6 +12,33 @@ Rubriken: **Neu**, **Geändert**, **Behoben**, **Entfernt**, **Sicherheit**, **N
 
 ## [Unreleased]
 
+## [1.9.7] – 2026-11-25
+
+### Hinweise zum Update
+- Version 1.9.6 wurde nicht als Image veröffentlicht (Sicherheitsscan im Release-Lauf). 1.9.7 enthält die komplette Dokumentverwaltung aus 1.9.6 samt deren Hinweisen zu Update und Rollback.
+
+### Behoben
+- Dateibrowser der Dokumentbibliothek: Ordnerabfrage nutzt einen gebundenen Parameter statt eines eingesetzten Zahlenwerts.
+
+## [1.9.6] – 2026-11-25
+
+### Neu
+- **Dokumentverwaltung unter „Dokumente“**: Neuer Menüpunkt für alle, denen eine Dokumentquelle freigegeben ist. Der Dateibrowser zeigt Ordner und Dateien mit Brotkrumen, Suche im Dateinamen, Filtern nach Status und Typ, Sortierung und Seiten zu je 50 Dateien, dazu Typ, Größe, Änderungsdatum, hochgeladen von, Status und die zugeteilten Kunden. In der gemeinsamen Quelle „Kundenunterlagen“ tragen die Kundenordner den Kundennamen mit Link ins Kunden-Wiki. Die Detailseite einer Datei zeigt Einzelheiten, den extrahierten Text, frühere Fassungen und Zuteilungen und erlaubt das Zuteilen an einen Kunden. Lesen dürfen alle mit Freigabe der Quelle; Ordner vertraulicher Kunden bleiben für Benutzer ohne Zugriff auf den Kunden verborgen.
+- **Dateien verwalten (Administratoren, Quellen „Hochgeladene Dateien“)**: Umbenennen (Endung bleibt), Verschieben, Ordner umbenennen oder verschieben, Mehrfachauswahl zum Verschieben und Löschen, neue Fassung hochladen, frühere Fassung wiederherstellen und Datei neu indexieren. Bei Ordnern, Netzlaufwerken und SharePoint bleiben die Dateien unangetastet; dort sind nur Neu indexieren und Zuteilen möglich.
+- **Papierkorb mit 30 Tagen Frist**: Gelöschte Dateien sind sofort weder in der Liste noch in der Suche, beim Assistenten, im Kunden-Wiki oder als Download zu finden. Administratoren stellen sie unter **Dokumente → Quelle → Papierkorb** wieder her (mit neuer Indexierung) oder löschen sie endgültig; nach 30 Tagen räumt ein nächtlicher Lauf auf. Ist der alte Name inzwischen belegt, heißt die wiederhergestellte Datei „Name (Nummer).Endung“.
+- **Eigene Unterlagen im Kunden-Wiki ersetzen und löschen**: Bei Dateien, die ein Benutzer selbst beim Kunden hochgeladen hat, stehen unter **Unterlagen** die Knöpfe **Neue Fassung** und **Löschen** (in den Papierkorb). Fremde Dateien bleiben unverändert.
+- **Aktivitätsprotokoll** (nur Administratoren) auf der Detailseite einer Datei: wer wann hochgeladen, ersetzt, umbenannt, verschoben, gelöscht, wiederhergestellt oder neu indexiert hat. Gespeichert werden nie Dateiinhalte. Die FAQ erklärt die neuen Funktionen.
+
+### Geändert
+- Der Menüpunkt **Datenanbindung → Dokumente** heißt jetzt **Dokumentquellen**; die Dateiliste einer Quelle öffnet sich im neuen Bereich **Dokumente**. Der alte Link zur Dateiliste leitet dorthin weiter.
+- **Löschen in der Dokumentbibliothek** ist Administratoren vorbehalten (bisher auch Technik-Administratoren) und legt die Datei in den Papierkorb, statt sie sofort endgültig zu löschen.
+- **Hochladen im Kunden-Wiki auf den Namen einer fremden Datei** wird abgelehnt, statt die Datei eines anderen Benutzers still zu ersetzen. Administratoren dürfen weiterhin ersetzen. Das gilt auch für Dateien, die vor diesem Update hochgeladen wurden: Sie haben keinen bekannten Besitzer, Wiki-Benutzer können sie nicht ersetzen oder löschen, und ein Upload mit gleichem Namen wird abgelehnt; das lösen nur Administratoren in der Dokumentbibliothek. Auch Technik-Administratoren ersetzen beim Hochladen in die Bibliothek nur noch eigene Dateien.
+- Dateien in Kundenordnern der gemeinsamen Quelle „Kundenunterlagen“, deren Kunde inzwischen vertraulich ist, sind für Benutzer ohne Zugriff auf diesen Kunden auch für den Assistenten nicht mehr auffindbar.
+
+### Hinweise zum Update
+- Die Datenbank erhält neue Spalten und die Tabelle für das Aktivitätsprotokoll; die Eindeutigkeit der Dateipfade gilt künftig nur für Dateien, die nicht im Papierkorb liegen. Bestehende Dateien haben keinen Besitzer und sind nur für Administratoren verwaltbar.
+- **Rollback**: Nach einem Zurückrollen des Images auf 1.9.5 kennt die alte Version den Papierkorb nicht. Dateien, die zu diesem Zeitpunkt im Papierkorb liegen, sind dann wieder sichtbar, aber ohne Volltextsuche (ihr Text wurde beim Löschen aus dem Index entfernt); sie lassen sich weiter öffnen und herunterladen. Existiert ein Pfad zugleich als lebende Datei und im Papierkorb, kann der Scan einzelne Dateien nicht speichern. Das Zurückrollen bleibt ohne Datenbank-Wiederherstellung möglich.
+
 ## [1.9.5] – 2026-11-24
 
 ### Geändert

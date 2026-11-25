@@ -2,9 +2,41 @@
   "schema": 1,
   "product": "firmen-ki",
   "channel": "stable",
-  "generated_at": "2026-11-24T15:31:26Z",
-  "latest": "1.9.5",
+  "generated_at": "2026-11-25T10:38:00Z",
+  "latest": "1.9.7",
   "releases": [
+    {
+      "version": "1.9.7",
+      "published_at": "2026-11-25T10:38:00Z",
+      "prerelease": false,
+      "min_from_version": null,
+      "rollback_safe": true,
+      "requires_manual_steps": false,
+      "images": {
+        "app": {
+          "ref": "ghcr.io/lotze1234/firmen-ki:1.9.7",
+          "digest": "sha256:24525313b2f782c09392571947b8d4adc965667747dac7d94dfde1ff4007ef7f",
+          "platforms": [
+            "linux/amd64",
+            "linux/arm64"
+          ]
+        },
+        "sandbox": {
+          "version": "2026.09.0",
+          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
+          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
+        },
+        "updater": {
+          "version": "1.0.3",
+          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.3",
+          "digest": "sha256:af1cdd8469e0738891f4af9ffc9762fb106b47470a433539dfc639af1658ebf6"
+        }
+      },
+      "changelog": "### Hinweise zum Update\n- Version 1.9.6 wurde nicht als Image veröffentlicht (Sicherheitsscan im Release-Lauf). 1.9.7 enthält die komplette Dokumentverwaltung aus 1.9.6 samt deren Hinweisen zu Update und Rollback.\n\n### Behoben\n- Dateibrowser der Dokumentbibliothek: Ordnerabfrage nutzt einen gebundenen Parameter statt eines eingesetzten Zahlenwerts.",
+      "notes": {
+        "expected_downtime_seconds": 60
+      }
+    },
     {
       "version": "1.9.5",
       "published_at": "2026-11-24T15:31:26Z",
@@ -289,38 +321,6 @@
         }
       },
       "changelog": "### Behoben\n- Antworten brachen mit „undefined method 'delete_prefix' for nil“ ab, wenn der KI-Server mitten im Stream einen\n  Fehler meldete und dessen Details in einem eigenen Netzwerk-Paket ankamen (häufig nach langen Agenten-Läufen).\n  Jetzt erscheint die eigentliche Meldung des Servers („Der KI-Server hat die Antwort mit einem Fehler\n  abgebrochen: …“), damit klar ist, was schiefging.",
-      "notes": {
-        "expected_downtime_seconds": 60
-      }
-    },
-    {
-      "version": "1.7.2",
-      "published_at": "2026-10-13T13:07:27Z",
-      "prerelease": false,
-      "min_from_version": null,
-      "rollback_safe": true,
-      "requires_manual_steps": false,
-      "images": {
-        "app": {
-          "ref": "ghcr.io/lotze1234/firmen-ki:1.7.2",
-          "digest": "sha256:372e9f1977578945c990ef5ee4d1142bbf6755859309adc740eada0fdb542f26",
-          "platforms": [
-            "linux/amd64",
-            "linux/arm64"
-          ]
-        },
-        "sandbox": {
-          "version": "2026.09.0",
-          "ref": "ghcr.io/lotze1234/firmen-ki-sandbox:2026.09.0",
-          "digest": "sha256:8db0dead1d9145410a2631cb8c4f7b1910140c06d30804efb77bc1c9a6b00cd0"
-        },
-        "updater": {
-          "version": "1.0.2",
-          "ref": "ghcr.io/lotze1234/firmen-ki-updater:1.0.2",
-          "digest": "sha256:c4bdd6ae6918ff8dc57a9cbe7008d602b1df685f6e7bc9ae945e8a103b60f4ec"
-        }
-      },
-      "changelog": "### Behoben\n- Die „KI-Agent- und Skill-Verbesserung“ ist wieder für alle Installationen da (in 1.7.1 versehentlich auf die\n  Herstellerinstanz beschränkt): Anmeldung unter *Einstellungen*, Seite *Verbesserungen*, Knöpfe auf Skill- und\n  Agenten-Seiten. Die Anmeldung gilt für die ganze Installation und nur für Administratoren. Claude Code bzw. Codex\n  überarbeitet ausschließlich Skills und Agenten und wird nie als Chat-Modell für Benutzer verwendet.\n  `FIRMENKI_VENDOR` wird nicht mehr benötigt.",
       "notes": {
         "expected_downtime_seconds": 60
       }
